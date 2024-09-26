@@ -11,7 +11,7 @@ import useMenuActive from "@/hooks/useMenuActive";
 
 const Navbar = () => {
   return (
-    <nav className="w-full flex items-center  md:py-2 py-4 mt-2 mx-auto">
+    <nav className="w-full flex items-center  md:py-2 py-4 mt-2 mx-auto mb-5">
       <div className="w-[60%] max-md:w-[90%] flex flex-col items-center gap-5 md:mx-auto">
         <div className="flex gap-10 justify-start items-center ">
           <Link href={"/"}>
@@ -24,7 +24,7 @@ const Navbar = () => {
           <div className="min-w-[20%]">
             <IoSearch size={25} />
           </div>
-          <ul className="flex flex-1 items-center  justify-center gap-10 ">
+          <ul className="flex flex-1 items-center  justify-center gap-10 text-lg">
             {navLinks.map((link, index) => {
               const isActive = useMenuActive(link.route)
               return (

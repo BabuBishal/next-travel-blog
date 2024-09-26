@@ -6,7 +6,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-15",
     tags: ["Iceland", "Adventure", "Nature"],
-    image: "https://example.com/iceland-hidden-gems.jpg",
+    image: "/assets/iceland.jpg",
     featured: true,
   },
   {
@@ -16,7 +16,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-10",
     tags: ["Tokyo", "Landmarks", "Culture"],
-    image: "https://example.com/tokyo-landmarks.jpg",
+    image: "/assets/shibuya-1.jpg",
     featured: false,
   },
   {
@@ -26,7 +26,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-08-30",
     tags: ["Bangkok", "Food", "Culture"],
-    image: "https://example.com/bangkok-street-food.jpg",
+    image: "/assets/bangkok.jpg",
     featured: false,
   },
   {
@@ -36,7 +36,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-05",
     tags: ["Hiking", "Andes", "Adventure"],
-    image: "https://example.com/andes-hiking.jpg",
+    image: "/assets/andes.jpg",
     featured: true,
   },
   {
@@ -46,7 +46,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-07-20",
     tags: ["Europe", "Budget Travel", "Tips"],
-    image: "https://example.com/budget-europe.jpg",
+    image: "/assets/europe.jpg",
     featured: true,
   },
   {
@@ -56,7 +56,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-06-15",
     tags: ["Safari", "Serengeti", "Wildlife"],
-    image: "https://example.com/serengeti-safari.jpg",
+    image: "/assets/serengeti.jpg",
     featured: true,
   },
   {
@@ -66,7 +66,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-08-10",
     tags: ["Beaches", "Caribbean", "Relaxation"],
-    image: "https://example.com/caribbean-beaches.jpg",
+    image: "/assets/carribean.jpg",
     featured: false,
   },
   {
@@ -76,7 +76,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-02",
     tags: ["Cambodia", "History", "Temples"],
-    image: "https://example.com/cambodia-temples.jpg",
+    image: "/assets/cambodia.jpg",
     featured: false,
   },
   {
@@ -86,7 +86,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-18",
     tags: ["Australia", "Road Trip", "Adventure"],
-    image: "https://example.com/australian-outback.jpg",
+    image: "/assets/australia.jpg",
     featured: false,
   },
   {
@@ -96,7 +96,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-08-25",
     tags: ["Morocco", "Culture", "Desert"],
-    image: "https://example.com/morocco-sahara.jpg",
+    image: "/assets/morocco.jpg",
     featured: true,
   },
   {
@@ -106,7 +106,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-05",
     tags: ["Norway", "Fjords", "Nature"],
-    image: "https://example.com/norway-fjords.jpg",
+    image: "/assets/norway.jpg",
     featured: true
 },
 {
@@ -116,7 +116,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-12",
     tags: ["Tokyo", "Nightlife", "City"],
-    image: "https://example.com/tokyo-night.jpg",
+    image: "/assets/tokyo.jpg",
     featured: false
 },
 {
@@ -126,7 +126,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-08-30",
     tags: ["Tuscany", "Wine", "History"],
-    image: "https://example.com/tuscany-hills.jpg",
+    image: "/assets/tuscany.jpg",
     featured: true
 },
 {
@@ -136,7 +136,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-09-20",
     tags: ["Patagonia", "Wilderness", "Adventure"],
-    image: "https://example.com/patagonia-landscape.jpg",
+    image: "/assets/patagonia.jpg",
     featured: false
 },
 {
@@ -146,7 +146,7 @@ const blogData = [
     author: "Bishal Babu Bohara",
     date: "2024-08-18",
     tags: ["Cambodia", "Temples", "History"],
-    image: "https://example.com/angkor-wat.jpg",
+    image: "/assets/ankorwat.jpg",
     featured: true
 }
 
