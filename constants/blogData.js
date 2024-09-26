@@ -7,6 +7,7 @@ const blogData = [
     date: "2024-09-15",
     tags: ["Iceland", "Adventure", "Nature"],
     image: "https://example.com/iceland-hidden-gems.jpg",
+    featured: true,
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const blogData = [
     date: "2024-09-10",
     tags: ["Tokyo", "Landmarks", "Culture"],
     image: "https://example.com/tokyo-landmarks.jpg",
+    featured: false,
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ const blogData = [
     date: "2024-08-30",
     tags: ["Bangkok", "Food", "Culture"],
     image: "https://example.com/bangkok-street-food.jpg",
+    featured: false,
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ const blogData = [
     date: "2024-09-05",
     tags: ["Hiking", "Andes", "Adventure"],
     image: "https://example.com/andes-hiking.jpg",
+    featured: true,
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ const blogData = [
     date: "2024-07-20",
     tags: ["Europe", "Budget Travel", "Tips"],
     image: "https://example.com/budget-europe.jpg",
+    featured: true,
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ const blogData = [
     date: "2024-06-15",
     tags: ["Safari", "Serengeti", "Wildlife"],
     image: "https://example.com/serengeti-safari.jpg",
+    featured: true,
   },
   {
     id: 7,
@@ -61,6 +67,7 @@ const blogData = [
     date: "2024-08-10",
     tags: ["Beaches", "Caribbean", "Relaxation"],
     image: "https://example.com/caribbean-beaches.jpg",
+    featured: false,
   },
   {
     id: 8,
@@ -70,6 +77,7 @@ const blogData = [
     date: "2024-09-02",
     tags: ["Cambodia", "History", "Temples"],
     image: "https://example.com/cambodia-temples.jpg",
+    featured: false,
   },
   {
     id: 9,
@@ -79,6 +87,7 @@ const blogData = [
     date: "2024-09-18",
     tags: ["Australia", "Road Trip", "Adventure"],
     image: "https://example.com/australian-outback.jpg",
+    featured: false,
   },
   {
     id: 10,
@@ -88,7 +97,59 @@ const blogData = [
     date: "2024-08-25",
     tags: ["Morocco", "Culture", "Desert"],
     image: "https://example.com/morocco-sahara.jpg",
-  }
+    featured: true,
+  },
+  {
+    id: 11,
+    title: "Exploring the Fjords of Norway: Nature's Majesty",
+    description: "Norway is home to some of the most breathtaking fjords in the world. This blog will guide you through the stunning landscapes of Geirangerfjord, Nærøyfjord, and the Lofoten Islands. Discover the best hiking trails, boat tours, and scenic drives to fully immerse yourself in Norway’s natural beauty.",
+    author: "Bishal Babu Bohara",
+    date: "2024-09-05",
+    tags: ["Norway", "Fjords", "Nature"],
+    image: "https://example.com/norway-fjords.jpg",
+    featured: true
+},
+{
+    id: 12,
+    title: "Tokyo by Night: Neon Dreams and Hidden Gems",
+    description: "Tokyo transforms into a neon wonderland at night, offering a unique blend of modernity and tradition. Explore the city's vibrant nightlife, from the bustling streets of Shibuya to the quiet temples hidden in the urban jungle. Learn how to navigate the city’s late-night food scene and discover lesser-known gems.",
+    author: "Bishal Babu Bohara",
+    date: "2024-09-12",
+    tags: ["Tokyo", "Nightlife", "City"],
+    image: "https://example.com/tokyo-night.jpg",
+    featured: false
+},
+{
+    id: 13,
+    title: "A Journey Through the Heart of Tuscany: Wine, Art, and History",
+    description: "Tuscany, with its rolling hills, vineyards, and medieval towns, is a paradise for travelers seeking art, history, and incredible cuisine. This blog takes you through the heart of Italy’s most iconic region, exploring the art of Florence, the vineyards of Chianti, and the hidden gems of the countryside.",
+    author: "Bishal Babu Bohara",
+    date: "2024-08-30",
+    tags: ["Tuscany", "Wine", "History"],
+    image: "https://example.com/tuscany-hills.jpg",
+    featured: true
+},
+{
+    id: 14,
+    title: "Patagonia: The Last Untamed Wilderness",
+    description: "Patagonia is one of the most remote and awe-inspiring regions in the world. This blog takes you through the rugged landscapes of Argentina and Chile, where glaciers meet jagged mountain peaks and wildlife roams freely. Learn the best ways to explore Torres del Paine and Fitz Roy, and immerse yourself in the raw beauty of Patagonia.",
+    author: "Bishal Babu Bohara",
+    date: "2024-09-20",
+    tags: ["Patagonia", "Wilderness", "Adventure"],
+    image: "https://example.com/patagonia-landscape.jpg",
+    featured: false
+},
+{
+    id: 15,
+    title: "Discovering the Temples of Angkor: Cambodia's Ancient Marvels",
+    description: "Cambodia's Angkor Wat is a must-visit for any traveler interested in history and architecture. This blog will guide you through the ancient temples of Angkor, from the iconic Angkor Wat to the hidden treasures of Ta Prohm and Bayon. Learn the best times to visit and how to appreciate the intricate carvings and history behind these wonders.",
+    author: "Bishal Babu Bohara",
+    date: "2024-08-18",
+    tags: ["Cambodia", "Temples", "History"],
+    image: "https://example.com/angkor-wat.jpg",
+    featured: true
+}
+
   // Add more blog entries here
 ];
 
