@@ -1,10 +1,11 @@
 import { CgMenuGridO, CgClose } from "react-icons/cg";
 import { navLinks } from "@/constants";
-import Route from "../ui/Route";
+// import Route from "../ui/Route";
 import { useState } from "react";
 import Link from "next/link";
 import Button from "../ui/Button";
 import useMenuActive from "@/hooks/useMenuActive";
+import clsx from "clsx";
 
 const MobileMenu = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -39,13 +40,14 @@ const MobileMenu = () => {
                 const isActive = useMenuActive(link.route);
                 return (
                   <li key={index}>
-                    <Route
-                      route={link.route}
-                      label={link.label}
-                      isActive={isActive}
+                    <Link
+                      href={link.route}
+                      
                       onClick={() => setOpenMobileMenu(false)}
-
-                    />
+                      className={clsx(isActive && "text-primary ")}
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 );
               })}
