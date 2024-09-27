@@ -29,7 +29,7 @@ const Hero = () => {
               <Overlay />
               <div className="absolute bottom-8 w-full  flex gap-2 md:gap-5  justify-center">
                 {post.tags.map((tag, id) => (
-                  <span className="text-white text-lg">{tag}</span>
+                  <span key={id} className="text-white text-lg">{tag}</span>
                 ))}
               <h2 className="absolute  bottom-12 font-bold text-white text-2xl md:text-4xl">{post.title}</h2>
               </div>
@@ -69,7 +69,7 @@ const Hero = () => {
             ))}
           </div>
         </div>
-        {/* <BlogCard post={topFeatured[0]} /> */}
+       
       </div>
     </section>
   );

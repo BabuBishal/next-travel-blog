@@ -4,7 +4,7 @@ import Tag from "../ui/Tag";
 import Overlay from "../ui/Overlay";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-const BlogCard = ({post}) => {
+const BlogCard = ({ post }) => {
   return (
     <article className="relative rounded-lg overflow-hidden">
       <div className=" h-[450px] relative ">
@@ -22,8 +22,15 @@ const BlogCard = ({post}) => {
             <Tag key={id} text={tag} />
           ))}
         </div>
-        <h3 className="text-3xl font-extrabold uppercase text-white">{post.title}</h3>
+        <h3 className="text-3xl font-extrabold uppercase text-white">
+          {post.title}
+        </h3>
       </div>
+      <Link 
+      href={{ pathname: `blog/${post.id}`, query: { ...post } }}
+      className="absolute bottom-0 right-0 bg-tertiary p-5 text-white rounded-tl-lg z-6 cursor-pointer">
+        <AiOutlineArrowRight size={30} />
+      </Link>
     </article>
   );
 };
