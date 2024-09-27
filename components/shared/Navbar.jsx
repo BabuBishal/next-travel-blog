@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { navLinks } from "@/constants";
 import clsx from "clsx";
-import Route from "../ui/Route";
-import Button from "../ui/Button";
+// import Route from "../ui/Route";
+// import Button from "../ui/Button";
 import { IoSearch, IoPersonCircle } from "react-icons/io5";
 import MobileMenu from "./MobileMenu";
 import useMenuActive from "@/hooks/useMenuActive";
@@ -29,7 +29,10 @@ const Navbar = () => {
               const isActive = useMenuActive(link.route)
               return (
               <li key={index}>
-                <Route route={link.route} label={link.label} isActive={isActive}/>
+              <Link href={link.route} isActive={isActive}
+                className={clsx(isActive && "text-primary ")}>
+                  {link.label}
+                </Link>
               </li>
             )})}
           </ul>
