@@ -39,17 +39,25 @@ const Hero = () => {
             </div> */}
           </article>
         ))}
-        <div className="md:w-[60%] w-full mt-5 mb-5 md:my-10  mx-5 md:mx-auto font-bold">
-          <h1 className="text-3xl md:text-5xl my-5">Featured Posts</h1>
+        <div className="md:w-[60%] w-full mt-5 mb-5 md:my-10 md:mx-auto font-bold">
+          <h1 className="text-3xl md:text-5xl my-5 mx-5">Featured Posts</h1>
           <div
-            className="  grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center  "
+            className="  grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center mx-5 "
             
           >
             {remainingFeatured.map((post, id) => (
+             <article key={id} className="flex flex-col gap-3 items-center text-cetnter relative">
               <div className="relative overflow-hidden h-72 shadow-xl ">
-                <img src={post.image} alt="" className="object-cover w-full h-full" />
+                <img src={post.image} alt="" className="object-cover " />
                 <Overlay />
               </div>
+              <div className="  flex gap-2 md:gap-5 items-center justify-center">
+                {post.tags.map((tag, id) => (
+                  <Tag key={id} text={tag} />
+                ))}
+              </div>
+              <h3 className="px-5 text-xl">{post.title}</h3>
+              </article>
             ))}
           </div>
         </div>
