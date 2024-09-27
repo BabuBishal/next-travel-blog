@@ -42,7 +42,7 @@ const MobileMenu = () => {
                   <li key={index}>
                     <Link
                       href={link.route}
-                      isActive={isActive}
+                      
                       onClick={() => setOpenMobileMenu(false)}
                       className={clsx(isActive && "text-primary ")}
                     >

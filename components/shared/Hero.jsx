@@ -3,6 +3,7 @@ import blogData from "@/constants/blogData";
 import Tag from "../ui/Tag";
 import Overlay from "../ui/Overlay";
 import Link from "next/link";
+import BlogCard from "./BlogCard";
 
 const Hero = () => {
   const featuredPost = blogData?.filter((blog) => blog.featured === true);
@@ -53,7 +54,7 @@ const Hero = () => {
           query: {...post}}}>
 
               <div className="relative overflow-hidden h-72 shadow-xl ">
-                <img src={post.image} alt="" className="object-cover " />
+                <img src={post.image} alt={`image for ${post.title}`} className="object-cover " />
                 <Overlay />
               </div>
           </Link>
@@ -68,6 +69,7 @@ const Hero = () => {
             ))}
           </div>
         </div>
+        {/* <BlogCard post={topFeatured[0]} /> */}
       </div>
     </section>
   );

@@ -8,6 +8,8 @@ const blogData = [
     tags: ["Iceland", "Adventure", "Nature"],
     image: "/assets/iceland.jpg",
     featured: true,
+    latestPost: true,
+    topPost: true
   },
   {
     id: 2,
@@ -18,6 +20,8 @@ const blogData = [
     tags: ["Tokyo", "Landmarks", "Culture"],
     image: "/assets/shibuya-1.jpg",
     featured: false,
+    latestPost: true,
+    topPost: false
   },
   {
     id: 3,
@@ -28,6 +32,8 @@ const blogData = [
     tags: ["Bangkok", "Food", "Culture"],
     image: "/assets/bangkok.jpg",
     featured: false,
+    latestPost: false,
+    topPost: false
   },
   {
     id: 4,
@@ -38,6 +44,8 @@ const blogData = [
     tags: ["Hiking", "Andes", "Adventure"],
     image: "/assets/andes.jpg",
     featured: true,
+    latestPost: false,
+    topPost: true
   },
   {
     id: 5,
@@ -48,6 +56,8 @@ const blogData = [
     tags: ["Europe", "Budget Travel", "Tips"],
     image: "/assets/europe.jpg",
     featured: true,
+    latestPost: false,
+    topPost: false
   },
   {
     id: 6,
@@ -58,6 +68,8 @@ const blogData = [
     tags: ["Safari", "Serengeti", "Wildlife"],
     image: "/assets/serengeti.jpg",
     featured: true,
+    latestPost: false,
+    topPost: false
   },
   {
     id: 7,
@@ -68,6 +80,8 @@ const blogData = [
     tags: ["Beaches", "Caribbean", "Relaxation"],
     image: "/assets/carribean.jpg",
     featured: false,
+    latestPost: false,
+    topPost: true
   },
   {
     id: 8,
@@ -78,6 +92,8 @@ const blogData = [
     tags: ["Cambodia", "History", "Temples"],
     image: "/assets/cambodia.jpg",
     featured: false,
+    latestPost: false,
+    topPost: false
   },
   {
     id: 9,
@@ -88,6 +104,8 @@ const blogData = [
     tags: ["Australia", "Road Trip", "Adventure"],
     image: "/assets/australia.jpg",
     featured: false,
+    latestPost: true,
+    topPost: true
   },
   {
     id: 10,
@@ -98,6 +116,8 @@ const blogData = [
     tags: ["Morocco", "Culture", "Desert"],
     image: "/assets/morocco.jpg",
     featured: true,
+    latestPost: false,
+    topPost: true
   },
   {
     id: 11,
@@ -107,7 +127,9 @@ const blogData = [
     date: "2024-09-05",
     tags: ["Norway", "Fjords", "Nature"],
     image: "/assets/norway.jpg",
-    featured: true
+    featured: true,
+    latestPost: true,
+    topPost: false
 },
 {
     id: 12,
@@ -117,7 +139,9 @@ const blogData = [
     date: "2024-09-12",
     tags: ["Tokyo", "Nightlife", "City"],
     image: "/assets/tokyo.jpg",
-    featured: false
+    featured: false,
+    latestPost: true,
+    topPost: true
 },
 {
     id: 13,
@@ -127,7 +151,9 @@ const blogData = [
     date: "2024-08-30",
     tags: ["Tuscany", "Wine", "History"],
     image: "/assets/tuscany.jpg",
-    featured: true
+    featured: true,
+    latestPost: false,
+    topPost: false
 },
 {
     id: 14,
@@ -137,7 +163,9 @@ const blogData = [
     date: "2024-09-20",
     tags: ["Patagonia", "Wilderness", "Adventure"],
     image: "/assets/patagonia.jpg",
-    featured: false
+    featured: false,
+    latestPost: true,
+    topPost: true
 },
 {
     id: 15,
@@ -147,7 +175,9 @@ const blogData = [
     date: "2024-08-18",
     tags: ["Cambodia", "Temples", "History"],
     image: "/assets/ankorwat.jpg",
-    featured: true
+    featured: true,
+    latestPost: false,
+    topPost: true
 }
 
   // Add more blog entries here
