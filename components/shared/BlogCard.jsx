@@ -7,7 +7,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 const BlogCard = ({post}) => {
   return (
     <article className="relative rounded-lg overflow-hidden">
-      <div className="w-[1000px] h-[450px] relative ">
+      <div className=" h-[450px] relative ">
         <Image
           src={post.image}
           fill
@@ -17,7 +17,7 @@ const BlogCard = ({post}) => {
         <Overlay />
       </div>
       <div className="absolute w-full h-full top-0 p-5 flex flex-col justify-start">
-        <div className="  flex gap-2 md:gap-5 ">
+        <div className="  flex gap-2 md:gap-5 flex-wrap">
           {post.tags.map((tag, id) => (
             <Tag key={id} text={tag} />
           ))}

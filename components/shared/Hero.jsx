@@ -27,11 +27,11 @@ const Hero = () => {
                 className="w-full h-full object-cover"
               />
               <Overlay />
-              <div className="absolute bottom-5 left-20 md:left-[42%] flex gap-2 md:gap-5 items-center justify-center">
+              <div className="absolute bottom-8 w-full  flex gap-2 md:gap-5  justify-center">
                 {post.tags.map((tag, id) => (
                   <span className="text-white text-lg">{tag}</span>
                 ))}
-              <h2 className="absolute  bottom-8 font-bold text-white text-xl md:text-2xl">{post.title}</h2>
+              <h2 className="absolute  bottom-12 font-bold text-white text-2xl md:text-4xl">{post.title}</h2>
               </div>
             </div></Link>
             {/*
