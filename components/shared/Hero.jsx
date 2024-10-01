@@ -49,7 +49,7 @@ const Hero = () => {
             className="  grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center mx-5 "
           >
             {remainingFeatured.map((post, id) => (
-             <article key={id} className="flex flex-col gap-3 items-center text-cetnter relative">
+             <article key={id} className="flex flex-col gap-3 items-center text-center relative">
              <Link href={{pathname: `blog/${post.id}`,
           query: {...post}}}>
 
