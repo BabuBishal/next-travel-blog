@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Button from "@/components/ui/Button.jsx";
@@ -35,23 +35,13 @@ const page = () => {
                 <span>Fake address, 9999 City</span>
               </p>
               <p className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5 mr-2 sm:mr-6"
-                >
+                <svg fill="currentColor" className="w-5 h-5 mr-2 sm:mr-6">
                   <use href="/icons.svg#icon-phone" />
                 </svg>
                 <span>123456789</span>
               </p>
               <p className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5 mr-2 sm:mr-6"
-                >
+                <svg fill="currentColor" className="w-5 h-5 mr-2 sm:mr-6">
                   <use href="/icons.svg#icon-mail" />
                 </svg>
                 <span>contact@business.com</span>
@@ -66,7 +56,7 @@ const page = () => {
               <span className="mb-1">Full name</span>
               <input
                 type="text"
-                placeholder="Leroy Jenkins"
+                placeholder="Your name here"
                 className="block p-1 w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-bg-primary bg-gray-200"
               />
             </label>
@@ -74,7 +64,7 @@ const page = () => {
               <span className="mb-1">Email address</span>
               <input
                 type="email"
-                placeholder="leroy@jenkins.com"
+                placeholder="example@email.com"
                 className="block p-1 w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-bg-primary bg-gray-200"
               />
             </label>
@@ -91,7 +81,7 @@ const page = () => {
             >
               Submit
             </button> */}
-            <Button text="submit" onClick={() => null}/>
+            <Button text="submit" onClick={() => null} />
           </form>
         </div>
       </section>
