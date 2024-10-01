@@ -25,8 +25,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} overflow-x-hidden bg-light`}>
         <Navbar />
-        <Footer />
         {children}
+        <Footer />
       </body>
     </html>
   );

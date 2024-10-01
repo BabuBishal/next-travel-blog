@@ -1,7 +1,15 @@
-import Image from "next/image";
+import Hero from "@/components/shared/Hero";
+import LatestPost from "@/components/shared/LatestPost";
+import TopPost from "@/components/shared/TopPost";
 
 export default function Home() {
   return (
-  <div className=""></div>
+  <>
+  <Hero />
+  <div className="w-[60%] grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto my-5">
+    <LatestPost />
+    <TopPost />
+  </div>
+  </>
   );
 }
