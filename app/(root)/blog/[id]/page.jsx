@@ -11,7 +11,7 @@ import blogData from "@/constants/blogData";
 const page = ({ searchParams }) => {
   const post = searchParams;
   return (
-    <div className="w-[60%] mx-auto">
+    <div className="w-full mx-5 lg:w-[60%] lg:mx-auto">
       <div className="w-full h-[400px] relative mb-5 ">
         <Image
           alt={`image for ${post.title}`}

@@ -33,7 +33,7 @@ console.log(inspirationFilteredData)
 
   return (
     <div className="w-full mx-5 lg:w-[60%] lg:mx-auto my-5">
-      <div className="flex gap-2 lg:gap-2 items-center  flex-wrap max-h-[500px] overflow-auto">
+      <div className="flex gap-2  items-center  flex-wrap max-h-[500px] overflow-auto">
         {tagsCollection.map((tag, id) => (
           <div key={id} className=" ">
             <Tag key={id} text={tag} onClick={() => setInspiration(tag)}/>

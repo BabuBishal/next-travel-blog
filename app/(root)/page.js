@@ -6,7 +6,7 @@ export default function Home() {
   return (
   <>
   <Hero />
-  <div className="md:w-[60%] grid grid-cols-1 md:grid-cols-3 md:gap-10 mx-auto my-5">
+  <div className="w-full lg:w-[60%] grid grid-cols-1 md:grid-cols-3 md:gap-10 mx-5 lg:mx-auto my-5">
     <LatestPost />
     <TopPost />
   </div>

@@ -38,16 +38,10 @@ const Hero = () => {
                 </div>
               </div>
             </Link>
-            {/*
-            <div className="md:w-[60%] text-justify px-10">{post.description}</div>
-            <div className="flex items-center gap-3  text-primary font-normal justify-center">
-              <div className="w-10 h-10 rounded-full bg-black"></div>
-              <h4>{post.author}</h4>
-              <span className="italic">{post.date}</span>
-            </div> */}
+            
           </article>
         ))}
-        <div className="md:w-[60%] w-full mt-5 mb-5 md:my-10 md:mx-auto font-bold">
+        <div className="lg:w-[60%] w-full mt-5 mb-5 md:my-10 md:mx-auto font-bold">
           <h1 className="text-3xl md:text-5xl my-5 mx-5">Featured Posts</h1>
           <div className="  grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center mx-5 ">
             {remainingFeatured.map((post, id) => (
