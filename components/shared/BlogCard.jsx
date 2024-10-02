@@ -26,9 +26,10 @@ const BlogCard = ({ post }) => {
           {post.title}
         </h3>
       </div>
-      <Link 
-      href={{ pathname: `blog/${post.id}`, query: { ...post } }}
-      className="absolute bottom-0 right-0 bg-tertiary p-5 text-white rounded-tl-lg z-6 cursor-pointer">
+      <Link
+        href={{ pathname: `blog/${post.id}`, query: { ...post } }}
+        className="absolute bottom-0 right-0 bg-tertiary p-5 text-white rounded-tl-lg z-6 cursor-pointer"
+      >
         <AiOutlineArrowRight size={30} />
       </Link>
     </article>

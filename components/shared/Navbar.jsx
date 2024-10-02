@@ -11,7 +11,6 @@ import useMenuActive from "@/hooks/useMenuActive";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
-
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
@@ -21,16 +20,23 @@ const Navbar = () => {
       } else {
         setIsScrolling(false);
       }
-    }
+    };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-    }
-  }, [])
+    };
+  }, []);
   return (
-    <nav className={clsx("w-full flex items-center py-4 mx-auto mb-5", isScrolling ? "fixed top-0 bg-white z-10 border-b": "relative border-none")}>
+    <nav
+      className={clsx(
+        "w-full flex items-center py-4 mx-auto mb-5",
+        isScrolling
+          ? "fixed top-0 bg-white z-10 border-b"
+          : "relative border-none"
+      )}
+    >
       <div className="w-[60%] max-md:w-[90%] flex flex-col items-center gap-5 md:mx-auto">
         <div className="flex gap-10 justify-start items-center ">
           <Link href={"/"}>
@@ -45,18 +51,20 @@ const Navbar = () => {
           </div>
           <ul className="flex flex-1 items-center  justify-center gap-10 text-xl">
             {navLinks.map((link, index) => {
-              const isActive = useMenuActive(link.route)
+              const isActive = useMenuActive(link.route);
               return (
-              <li key={index}>
-              <Link href={link.route} 
-                className={clsx(isActive && "text-primary ")}>
-                  {link.label}
-                </Link>
-              </li>
-            )})}
+                <li key={index}>
+                  <Link
+                    href={link.route}
+                    className={clsx(isActive && "text-primary ")}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <div className="flex items-center justify-end gap-2 min-w-[20%]">
-            
             <IoPersonCircle size={30} />
           </div>
         </div>
