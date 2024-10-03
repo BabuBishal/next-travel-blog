@@ -6,16 +6,31 @@ import Link from "next/link";
 import Button from "../ui/Button";
 import useMenuActive from "@/hooks/useMenuActive";
 import clsx from "clsx";
+import { IoClose } from "react-icons/io5";
 
-const MobileMenu = () => {
+const MobileMenu = ({setShowLoginPage, showLoginPage, setLoginMode, handleLogin }) => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const mobileMenuHandler = () => {
     setOpenMobileMenu(!openMobileMenu);
   };
+
+  const handleLogIn =() => {
+    setShowLoginPage(true);
+    setLoginMode("Sign In");
+    setOpenMobileMenu(false);
+  }
+
+  const handleSignup =() => {
+    setShowLoginPage(true);
+    setLoginMode("Sign Up");
+    setOpenMobileMenu(false);
+
+  }
+
   return (
     <>
-      <div className="md:hidden z-[1000] absolute right-4" onClick={mobileMenuHandler}>
+      <div className="md:hidden z-[90] absolute right-4" onClick={mobileMenuHandler}>
         {openMobileMenu ? <CgClose size={25} /> : <CgMenuGridO size={25} />}
       </div>
 
@@ -52,12 +67,18 @@ const MobileMenu = () => {
               })}
             </ul>
             <div className="flex flex-col gap-5 pb-10">
-              <Button text="Log In" onClick={() => null} />
-              <Button text="Sign In" onClick={() => null} />
+              <Button text="Log In" onClick={handleLogIn} />
+              <Button text="Sign Up" onClick={handleSignup} />
             </div>
           </div>
         </div>
+        
       )}
+      {showLoginPage &&
+          <div className="absolute flex  justify-end gap-2 max-w-[10%] z-[100] lg:hidden top-20 right-5" onClick={handleLogin}>
+            <IoClose size={30} />
+         </div>
+        }
     </>
   );
 };
