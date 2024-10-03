@@ -15,8 +15,10 @@ const page = () => {
     setVisibleBlogs((previousVisibleBlogs) => previousVisibleBlogs + 3);
   };
 
-  const inspirationFilteredData = blogData.filter((blogdata) => blogdata.tags.includes(inspiration))
-console.log(inspirationFilteredData)
+  const inspirationFilteredData = blogData.filter((blogdata) =>
+    blogdata.tags.includes(inspiration)
+  );
+  console.log(inspirationFilteredData);
   useEffect(() => {
     const allTags = new Set(); // Use Set to store unique tags
 
@@ -36,7 +38,7 @@ console.log(inspirationFilteredData)
       <div className="flex gap-2  items-center  flex-wrap max-h-[500px] overflow-auto">
         {tagsCollection.map((tag, id) => (
           <div key={id} className=" ">
-            <Tag key={id} text={tag} onClick={() => setInspiration(tag)}/>
+            <Tag key={id} text={tag} onClick={() => setInspiration(tag)} />
           </div>
         ))}
       </div>

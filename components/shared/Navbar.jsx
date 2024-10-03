@@ -13,18 +13,17 @@ import Login from "./Login";
 
 const Navbar = () => {
   const [isScrolling, setIsScrolling] = useState(false);
-  const [showLoginPage, setShowLoginPage] = useState(false)
-  const [loginMode, setLoginMode] = useState("Sign In")
+  const [showLoginPage, setShowLoginPage] = useState(false);
+  const [loginMode, setLoginMode] = useState("Sign In");
 
   const handleLogin = () => {
-    setShowLoginPage(!showLoginPage)
-  }
+    setShowLoginPage(!showLoginPage);
+  };
 
   const handleClick = () => {
-    loginMode === "Sign In" && setLoginMode("Sign Up") ;
+    loginMode === "Sign In" && setLoginMode("Sign Up");
     loginMode === "Sign Up" && setLoginMode("Sign In");
-    
-  }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,8 +56,12 @@ const Navbar = () => {
               Wanderlust
             </h1>
           </Link>
-      <MobileMenu setShowLoginPage={setShowLoginPage} showLoginPage={showLoginPage} setLoginMode={setLoginMode} handleLogin={handleLogin} />
-
+          <MobileMenu
+            setShowLoginPage={setShowLoginPage}
+            showLoginPage={showLoginPage}
+            setLoginMode={setLoginMode}
+            handleLogin={handleLogin}
+          />
         </div>
         <div className="w-full flex justify-between gap-5 items-center max-md:hidden mx-auto ">
           <div className="max-w-[20%]">
@@ -79,15 +82,27 @@ const Navbar = () => {
               );
             })}
           </ul>
-          <div className="flex items-center justify-end gap-2 max-w-[10%] z-[100]" onClick={handleLogin}>
-           {!showLoginPage ? 
-            <IoPersonCircle size={30}   /> :
-            <IoClose size={30} />}
+          <div
+            className="flex items-center justify-end gap-2 max-w-[10%] z-[100]"
+            onClick={handleLogin}
+          >
+            {!showLoginPage ? (
+              <IoPersonCircle size={30} />
+            ) : (
+              <IoClose size={30} />
+            )}
           </div>
         </div>
       </div>
-      <div className={clsx("absolute w-full h-screen bg-tertiary z-[99]", showLoginPage ? "top-20 mx-auto flex justify-center items-center" : "hidden")}>
-  <Login  loginMode={loginMode} handleClick={handleClick} />
+      <div
+        className={clsx(
+          "absolute w-full h-screen bg-tertiary z-[99]",
+          showLoginPage
+            ? "top-20 mx-auto flex justify-center items-center"
+            : "hidden"
+        )}
+      >
+        <Login loginMode={loginMode} handleClick={handleClick} />
       </div>
     </nav>
   );
