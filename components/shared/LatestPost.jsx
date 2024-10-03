@@ -20,7 +20,7 @@ const LatestPost = () => {
           Latest Posts
         </h2>
       </div>
-      <div className="flex flex-col gap-10 h-full">
+      <div className="flex flex-col gap-10 h-full ">
         {latestpost.slice(0, visibleBlogs).map((post, id) => (
           <BlogCard key={id} post={post} />
         ))}
