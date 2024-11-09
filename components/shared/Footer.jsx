@@ -7,17 +7,21 @@ import Link from "next/link";
 import clsx from "clsx";
 
 const Footer = ({}) => {
+  const activeLinks = navLinks.map((link) => {
+    const isActive = useMenuActive(link.route); // Call the hook here
+    return { ...link, isActive }; // Store the active state in each link
+  });
+
   return (
     <footer className="bg-gray-100 text-gray-900 border-t">
       <div className="container flex flex-col p-4 mx-auto md:p-8  ">
         <ul className="self-center py-6 space-y-4 text-center sm:flex sm:space-y-0 sm:justify-around sm:space-x-4 lg:flex-1 lg:justify-start">
-          {navLinks.map((link, index) => {
-            const isActive = useMenuActive(link.route);
+          {activeLinks.map((link, index) => {
             return (
               <li key={index}>
                 <Link
                   href={link.route}
-                  className={clsx(isActive && "text-primary ")}
+                  className={clsx(link.isActive && "text-primary ")}
                 >
                   {link.label}
                 </Link>

@@ -6,7 +6,7 @@ import Tag from "@/components/ui/Tag";
 import Button from "@/components/ui/Button";
 import BlogCard from "@/components/shared/BlogCard";
 
-const page = () => {
+const Page = () => {
   const [tagsCollection, setTagsCollection] = useState([]);
   const [inspiration, setInspiration] = useState("Culture");
   const [visibleBlogs, setVisibleBlogs] = useState(5);
@@ -61,4 +61,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
