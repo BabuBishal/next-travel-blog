@@ -29,7 +29,7 @@ const Page = () => {
     });
 
     setTagsCollection([...allTags]);
-  }, [blogData]);
+  },[]);
 
   // console.log(tagsCollection);
 
