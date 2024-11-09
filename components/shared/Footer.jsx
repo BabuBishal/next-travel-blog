@@ -5,12 +5,18 @@ import useMenuActive from "@/hooks/useMenuActive";
 import Link from "next/link";
 // import Route from "../ui/Route";
 import clsx from "clsx";
+import { useState } from "react";
 
 const Footer = ({}) => {
-  const activeLinks = navLinks.map((link) => {
-    const isActive = useMenuActive(link.route); // Call the hook here
-    return { ...link, isActive }; // Store the active state in each link
-  });
+  const [activeLinks, setActiveLinks] = useState([]);
+
+  useEffect(() => {
+    const updatedLinks = navLinks.map((link) => ({
+      ...link,
+      isActive: useMenuActive(link.route), // Call the hook here inside useEffect
+    }));
+    setActiveLinks(updatedLinks);
+  }, [navLinks]);
 
   return (
     <footer className="bg-gray-100 text-gray-900 border-t">

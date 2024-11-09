@@ -16,11 +16,15 @@ const Navbar = () => {
   const [showLoginPage, setShowLoginPage] = useState(false);
   const [loginMode, setLoginMode] = useState("Sign In");
 
-  const activeLinks = navLinks.map((link) => {
-    const isActive = useMenuActive(link.route); // Call the hook here
-    return { ...link, isActive }; // Store the active state in each link
-  });
+  const [activeLinks, setActiveLinks] = useState([]);
 
+  useEffect(() => {
+    const updatedLinks = navLinks.map((link) => ({
+      ...link,
+      isActive: useMenuActive(link.route), // Call the hook here inside useEffect
+    }));
+    setActiveLinks(updatedLinks);
+  }, [navLinks]);
   const handleLogin = () => {
     setShowLoginPage(!showLoginPage);
   };

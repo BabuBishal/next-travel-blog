@@ -19,10 +19,15 @@ const MobileMenu = ({
 
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
-  const activeLinks = navLinks.map((link) => {
-    const isActive = useMenuActive(link.route); // Call the hook here
-    return { ...link, isActive }; // Store the active state in each link
-  });
+  const [activeLinks, setActiveLinks] = useState([]);
+
+  useEffect(() => {
+    const updatedLinks = navLinks.map((link) => ({
+      ...link,
+      isActive: useMenuActive(link.route), // Call the hook here inside useEffect
+    }));
+    setActiveLinks(updatedLinks);
+  }, [navLinks]);
 
   const mobileMenuHandler = () => {
     setOpenMobileMenu(!openMobileMenu);
