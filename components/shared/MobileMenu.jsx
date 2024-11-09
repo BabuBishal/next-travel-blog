@@ -7,6 +7,7 @@ import Button from "../ui/Button";
 import useMenuActive from "@/hooks/useMenuActive";
 import clsx from "clsx";
 import { IoClose } from "react-icons/io5";
+import Image from "next/image";
 
 const MobileMenu = ({
   setShowLoginPage,
@@ -14,7 +15,14 @@ const MobileMenu = ({
   setLoginMode,
   handleLogin,
 }) => {
+  const [user, setUser] = useState();
+
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
+
+  const activeLinks = navLinks.map((link) => {
+    const isActive = useMenuActive(link.route); // Call the hook here
+    return { ...link, isActive }; // Store the active state in each link
+  });
 
   const mobileMenuHandler = () => {
     setOpenMobileMenu(!openMobileMenu);
@@ -57,15 +65,20 @@ const MobileMenu = ({
                 </h1>
               </Link>
             </div>
+            {user && (
+              <div>
+                <Image src="" alt="" fill width={30} height={30} className="" />
+                <h3>{user}</h3>
+              </div>
+            )}
             <ul className="flex items-center justify-start gap-10 flex-col  flex-1 py-5 border-b">
-              {navLinks.map((link, index) => {
-                const isActive = useMenuActive(link.route);
+              {activeLinks.map((link, index) => {
                 return (
                   <li key={index}>
                     <Link
                       href={link.route}
                       onClick={() => setOpenMobileMenu(false)}
-                      className={clsx(isActive && "text-primary ")}
+                      className={clsx(link.isActive && "text-primary ")}
                     >
                       {link.label}
                     </Link>

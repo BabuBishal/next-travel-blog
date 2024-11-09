@@ -16,6 +16,11 @@ const Navbar = () => {
   const [showLoginPage, setShowLoginPage] = useState(false);
   const [loginMode, setLoginMode] = useState("Sign In");
 
+  const activeLinks = navLinks.map((link) => {
+    const isActive = useMenuActive(link.route); // Call the hook here
+    return { ...link, isActive }; // Store the active state in each link
+  });
+
   const handleLogin = () => {
     setShowLoginPage(!showLoginPage);
   };
@@ -27,7 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
+      if (window.scrollY > 32) {
         setIsScrolling(true);
       } else {
         setIsScrolling(false);
@@ -43,10 +48,8 @@ const Navbar = () => {
   return (
     <nav
       className={clsx(
-        "w-full flex items-center py-4 mx-auto mb-5",
-        isScrolling
-          ? "fixed top-0 bg-white z-10 border-b"
-          : "relative border-none"
+        "w-full flex items-center py-4 mx-auto mb-5 relative border-none",
+        isScrolling && "fixed top-0 bg-white z-10 border-b"
       )}
     >
       <div className="w-full lg:w-[60%] mx-5 flex flex-col items-center gap-5 lg:mx-auto">
@@ -68,13 +71,12 @@ const Navbar = () => {
             <IoSearch size={25} />
           </div>
           <ul className="flex flex-1 items-center  justify-center gap-10 text-xl">
-            {navLinks.map((link, index) => {
-              const isActive = useMenuActive(link.route);
+            {activeLinks.map((link, index) => {
               return (
                 <li key={index}>
                   <Link
                     href={link.route}
-                    className={clsx(isActive && "text-primary ")}
+                    className={clsx(link.isActive && "text-primary ")}
                   >
                     {link.label}
                   </Link>
