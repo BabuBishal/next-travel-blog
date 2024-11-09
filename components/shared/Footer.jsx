@@ -15,8 +15,10 @@ const Footer = ({}) => {
             const isActive = useMenuActive(link.route);
             return (
               <li key={index}>
-                <Link href={link.route} 
-                className={clsx(isActive && "text-primary ")}>
+                <Link
+                  href={link.route}
+                  className={clsx(isActive && "text-primary ")}
+                >
                   {link.label}
                 </Link>
               </li>

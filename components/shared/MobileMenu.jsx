@@ -6,16 +6,46 @@ import Link from "next/link";
 import Button from "../ui/Button";
 import useMenuActive from "@/hooks/useMenuActive";
 import clsx from "clsx";
+import { IoClose } from "react-icons/io5";
+import Image from "next/image";
 
-const MobileMenu = () => {
+const MobileMenu = ({
+  setShowLoginPage,
+  showLoginPage,
+  setLoginMode,
+  handleLogin,
+}) => {
+  const [user, setUser] = useState();
+
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
+
+  const activeLinks = navLinks.map((link) => {
+    const isActive = useMenuActive(link.route); // Call the hook here
+    return { ...link, isActive }; // Store the active state in each link
+  });
 
   const mobileMenuHandler = () => {
     setOpenMobileMenu(!openMobileMenu);
   };
+
+  const handleLogIn = () => {
+    setShowLoginPage(true);
+    setLoginMode("Sign In");
+    setOpenMobileMenu(false);
+  };
+
+  const handleSignup = () => {
+    setShowLoginPage(true);
+    setLoginMode("Sign Up");
+    setOpenMobileMenu(false);
+  };
+
   return (
     <>
-      <div className="md:hidden z-[1000] " onClick={mobileMenuHandler}>
+      <div
+        className="md:hidden z-[90] absolute right-4"
+        onClick={mobileMenuHandler}
+      >
         {openMobileMenu ? <CgClose size={25} /> : <CgMenuGridO size={25} />}
       </div>
 
@@ -35,16 +65,20 @@ const MobileMenu = () => {
                 </h1>
               </Link>
             </div>
+            {user && (
+              <div>
+                <Image src="" alt="" fill width={30} height={30} className="" />
+                <h3>{user}</h3>
+              </div>
+            )}
             <ul className="flex items-center justify-start gap-10 flex-col  flex-1 py-5 border-b">
-              {navLinks.map((link, index) => {
-                const isActive = useMenuActive(link.route);
+              {activeLinks.map((link, index) => {
                 return (
                   <li key={index}>
                     <Link
                       href={link.route}
-                      
                       onClick={() => setOpenMobileMenu(false)}
-                      className={clsx(isActive && "text-primary ")}
+                      className={clsx(link.isActive && "text-primary ")}
                     >
                       {link.label}
                     </Link>
@@ -53,10 +87,18 @@ const MobileMenu = () => {
               })}
             </ul>
             <div className="flex flex-col gap-5 pb-10">
-              <Button text="Log In" onClick={() => null} />
-              <Button text="Sign In" onClick={() => null} />
+              <Button text="Log In" onClick={handleLogIn} />
+              <Button text="Sign Up" onClick={handleSignup} />
             </div>
           </div>
+        </div>
+      )}
+      {showLoginPage && (
+        <div
+          className="absolute flex  justify-end gap-2 max-w-[10%] z-[100] lg:hidden top-20 right-5"
+          onClick={handleLogin}
+        >
+          <IoClose size={30} />
         </div>
       )}
     </>
