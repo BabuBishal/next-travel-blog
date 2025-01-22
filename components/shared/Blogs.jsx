@@ -13,7 +13,7 @@ const Blogs = () => {
   };
 
   return (
-    <section className="col-span-2 ">
+    <section className="col-span-2 mb-5">
       <div className="w-full text-center">
         <h2 className="text-center text-3xl font-extrabold uppercase text-secondary inline-block px-2 mb-10">
           All Posts
