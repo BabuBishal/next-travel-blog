@@ -1,13 +1,14 @@
+"use client";
 import { CgMenuGridO, CgClose } from "react-icons/cg";
 import { navLinks } from "@/constants";
 // import Route from "../ui/Route";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "../ui/Button";
-import useMenuActive from "@/hooks/useMenuActive";
 import clsx from "clsx";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const MobileMenu = ({
   setShowLoginPage,
@@ -16,7 +17,7 @@ const MobileMenu = ({
   handleLogin,
 }) => {
   const [user, setUser] = useState();
-
+  const pathname = usePathname();
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const [activeLinks, setActiveLinks] = useState([]);
@@ -24,10 +25,12 @@ const MobileMenu = ({
   useEffect(() => {
     const updatedLinks = navLinks.map((link) => ({
       ...link,
-      isActive: useMenuActive(link.route), // Call the hook here inside useEffect
+      isActive:
+        (pathname.includes(link.route) && link.route.length > 1) ||
+        pathname === link.route,
     }));
     setActiveLinks(updatedLinks);
-  }, [navLinks]);
+  }, [pathname]);
 
   const mobileMenuHandler = () => {
     setOpenMobileMenu(!openMobileMenu);

@@ -1,22 +1,25 @@
 "use client";
 
 import { navLinks } from "@/constants";
-import useMenuActive from "@/hooks/useMenuActive";
 import Link from "next/link";
 // import Route from "../ui/Route";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Footer = ({}) => {
   const [activeLinks, setActiveLinks] = useState([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     const updatedLinks = navLinks.map((link) => ({
       ...link,
-      isActive: useMenuActive(link.route), // Call the hook here inside useEffect
+      isActive:
+        (pathname.includes(link.route) && link.route.length > 1) ||
+        pathname === link.route,
     }));
     setActiveLinks(updatedLinks);
-  }, [navLinks]);
+  }, [pathname]);
 
   return (
     <footer className="bg-gray-100 text-gray-900 border-t">
