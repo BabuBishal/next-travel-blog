@@ -29,7 +29,7 @@ const Page = () => {
     });
 
     setTagsCollection([...allTags]);
-  },[]);
+  }, []);
 
   // console.log(tagsCollection);
 
@@ -37,7 +37,7 @@ const Page = () => {
     <div className="w-full mx-5 lg:w-[60%] lg:mx-auto my-5">
       <div className="flex gap-2  items-center  flex-wrap max-h-[500px] overflow-auto">
         {tagsCollection.map((tag, id) => (
-          <div key={id} className=" ">
+          <div key={id} className="cursor-pointer ">
             <Tag key={id} text={tag} onClick={() => setInspiration(tag)} />
           </div>
         ))}
