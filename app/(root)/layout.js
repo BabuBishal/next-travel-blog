@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Poppins, Aladin} from "next/font/google"
+import { Poppins } from "next/font/google"
 
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
@@ -9,10 +9,7 @@ const poppins = Poppins({
   weight: ['100', '400', '500', '700']
 })
 
-const aladin = Aladin({
-  subsets: ['latin'],
-  weight: ['400']
-})
+
 
 
 export const metadata = {
@@ -25,8 +22,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} overflow-x-hidden bg-light`}>
         <Navbar />
-        <Footer />
         {children}
+        <Footer />
       </body>
     </html>
   );
