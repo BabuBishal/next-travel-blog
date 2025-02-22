@@ -22,12 +22,12 @@ const BlogCard = ({ post }) => {
             <Tag key={id} text={tag} />
           ))}
         </div>
-        <h3 className="text-3xl font-extrabold uppercase text-white">
+        <h3 className="text-3xl font-extrabold uppercase text-white drop-shadow-lg">
           {post.title}
         </h3>
       </div>
       <Link
-        href={{ pathname: `blog/${post.id}`, query: { ...post } }}
+        href={{ pathname: `/blogs/${post.id}`, query: { ...post } }}
         className="absolute bottom-0 right-0 bg-tertiary p-5 text-white rounded-tl-lg z-6 cursor-pointer"
       >
         <AiOutlineArrowRight size={30} />

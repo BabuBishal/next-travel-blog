@@ -16,7 +16,7 @@ const TopPost = () => {
       <div className="flex h-full flex-col gap-12 items-center">
         {topPost.map((post, id) => (
           <Link
-            href={{ pathname: `blog/${post.id}`, query: { ...post } }}
+            href={{ pathname: `/blogs/${post.id}`, query: { ...post } }}
             key={id}
           >
             <article>
