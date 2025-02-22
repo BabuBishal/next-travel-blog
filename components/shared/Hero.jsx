@@ -18,7 +18,7 @@ const Hero = () => {
             key={id}
             className="w-full flex flex-col items-center gap-5 mb-5 text-center relative "
           >
-            <Link href={{ pathname: `blog/${post.id}`, query: { ...post } }}>
+            <Link href={{ pathname: `/blogs/${post.id}`, query: { ...post } }}>
               <div className="relative max-h-[700px] overflow-hidden">
                 <img
                   src={post.image}
@@ -38,7 +38,6 @@ const Hero = () => {
                 </div>
               </div>
             </Link>
-            
           </article>
         ))}
         <div className="lg:w-[60%] w-full mt-5 mb-5 md:my-10 md:mx-auto font-bold">
@@ -50,7 +49,7 @@ const Hero = () => {
                 className="flex flex-col gap-3 items-center text-center relative"
               >
                 <Link
-                  href={{ pathname: `blog/${post.id}`, query: { ...post } }}
+                  href={{ pathname: `/blogs/${post.id}`, query: { ...post } }}
                 >
                   <div className="relative overflow-hidden h-72 shadow-xl ">
                     <img
