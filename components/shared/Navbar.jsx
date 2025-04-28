@@ -2,17 +2,18 @@
 import Link from "next/link";
 import { navLinks } from "@/constants";
 import clsx from "clsx";
-import { IoSearch, IoPersonCircle, IoClose } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
 import MobileMenu from "./MobileMenu";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Login from "./Login";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Button from "../ui/Button";
 
 const Navbar = () => {
   const [isScrolling, setIsScrolling] = useState(false);
-  const [showLoginPage, setShowLoginPage] = useState(false);
-  const [loginMode, setLoginMode] = useState("Sign In");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const [activeLinks, setActiveLinks] = useState([]);
 
@@ -26,14 +27,6 @@ const Navbar = () => {
     setActiveLinks(updatedLinks);
   }, [pathname]);
 
-  const handleLogin = () => {
-    setShowLoginPage(!showLoginPage);
-  };
-
-  const handleClick = () => {
-    setLoginMode((prev) => (prev === "Sign In" ? "Sign Up" : "Sign In"));
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolling(window.scrollY > 32);
@@ -42,6 +35,13 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLoginClick = () => {
+    signIn("google", { callbackUrl: "/" });
+  };
+  const handleLogoutClick = () => {
+    signOut({ callbackUrl: "/" });
+  };
 
   return (
     <nav
@@ -57,12 +57,7 @@ const Navbar = () => {
               Wanderlust
             </h1>
           </Link>
-          <MobileMenu
-            setShowLoginPage={setShowLoginPage}
-            showLoginPage={showLoginPage}
-            setLoginMode={setLoginMode}
-            handleLogin={handleLogin}
-          />
+          <MobileMenu />
         </div>
         <div className="w-full flex justify-between gap-5 items-center max-md:hidden mx-auto">
           <div className="max-w-[20%]">
@@ -80,27 +75,46 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div
-            className="flex items-center justify-end gap-2 max-w-[10%] z-[100]"
-            onClick={handleLogin}
-          >
-            {!showLoginPage ? (
-              <IoPersonCircle size={30} />
+          <div className="relative flex items-center space-x-4">
+            {session ? (
+              <>
+                <img
+                  src={session?.user?.image || "/hacker.png"}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/hacker.png"; // fallback
+                  }}
+                  alt="Profile"
+                  onMouseOver={() => setDropdownOpen(true)}
+                  onMouseOut={() => setDropdownOpen(false)}
+                  className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-teal-500 transition"
+                />
+
+                {dropdownOpen && (
+                  <div
+                    className="absolute -right-10 top-10 w-52 bg-transparent p-5  overflow-hidden z-50"
+                    onMouseOver={() => setDropdownOpen(true)}
+                    onMouseOut={() => setDropdownOpen(false)}
+                  >
+                    <div className="py-5 w-full h-full flex flex-col gap-2 justify-center items-center shadow-xl rounded-md bg-white">
+                      <Link
+                        href="/profile"
+                        className="w-full text-center block px-4 py-2 hover:bg-gray-100 "
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        Profile
+                      </Link>
+
+                      <Button onClick={handleLogoutClick} text="Log Out" />
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
-              <IoClose size={30} />
+              <Button onClick={handleLoginClick} text="Log In" />
             )}
           </div>
         </div>
-      </div>
-      <div
-        className={clsx(
-          "absolute w-full h-screen bg-tertiary z-[99]",
-          showLoginPage
-            ? "top-20 mx-auto flex justify-center items-center"
-            : "hidden"
-        )}
-      >
-        <Login loginMode={loginMode} handleClick={handleClick} />
       </div>
     </nav>
   );

@@ -3,7 +3,7 @@ import blogData from "@/constants/blogData";
 import Tag from "../ui/Tag";
 import Overlay from "../ui/Overlay";
 import Link from "next/link";
-import BlogCard from "./BlogCard";
+// import BlogCard from "./BlogCard";
 
 const Hero = () => {
   const featuredPost = blogData?.filter((blog) => blog.featured === true);
