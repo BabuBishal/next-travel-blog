@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const MobileMenu = ({
   setShowLoginPage,
@@ -18,6 +19,7 @@ const MobileMenu = ({
   const [user, setUser] = useState(null); // Added explicit null initialization
   const pathname = usePathname();
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const { data: session } = useSession();
 
   // Calculate active links directly from pathname
   const activeLinks = navLinks.map((link) => ({
@@ -43,16 +45,11 @@ const MobileMenu = ({
     setOpenMobileMenu((prev) => !prev);
   };
 
-  const handleLogIn = () => {
-    setShowLoginPage(true);
-    setLoginMode("Sign In");
-    setOpenMobileMenu(false);
+  const handleLoginClick = () => {
+    signIn("google", { callbackUrl: "/" });
   };
-
-  const handleSignup = () => {
-    setShowLoginPage(true);
-    setLoginMode("Sign Up");
-    setOpenMobileMenu(false);
+  const handleLogoutClick = () => {
+    signOut({ callbackUrl: "/" });
   };
 
   return (
@@ -119,8 +116,27 @@ const MobileMenu = ({
             </nav>
 
             <div className="flex flex-col gap-5 pb-10">
-              <Button text="Log In" onClick={handleLogIn} />
-              <Button text="Sign Up" onClick={handleSignup} />
+              {!session ? (
+                <Button text="Log In" onClick={handleLoginClick} />
+              ) : (
+                <div className="flex flex-col justify-center gap-2 ">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={session.user.image}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-teal-500 transition"
+                    />
+                    <Link
+                      href="/profile"
+                      className="w-full block px-4 py-2 hover:bg-gray-200 "
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                  </div>
+                  <Button text="Sign Out" onClick={handleLogoutClick} />
+                </div>
+              )}
             </div>
           </div>
         </div>

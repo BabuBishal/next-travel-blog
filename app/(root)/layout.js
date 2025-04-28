@@ -1,16 +1,14 @@
 import "./globals.css";
-import { Poppins } from "next/font/google"
+import { Poppins } from "next/font/google";
 
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import { Providers } from "@/components/providers/SessionProvider";
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['100', '400', '500', '700']
-})
-
-
-
+  subsets: ["latin"],
+  weight: ["100", "400", "500", "700"],
+});
 
 export const metadata = {
   title: "Wanderlust : Journeys Beyond Horizons",
@@ -21,9 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.className} overflow-x-hidden bg-light`}>
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
