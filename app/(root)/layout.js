@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
-import { Providers } from "@/components/providers/SessionProvider";
+import { Providers } from "@/lib/providers/SessionProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -18,7 +18,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} overflow-x-hidden bg-light`}>
+      <body
+        className={`${poppins.className} relative overflow-x-hidden bg-light`}
+      >
         <Providers>
           <Navbar />
           {children}
