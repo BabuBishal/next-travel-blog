@@ -1,142 +1,183 @@
-// components/CreatePostForm.tsx
 "use client";
+import MDEditor from "@uiw/react-md-editor";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { client } from "@/sanity/lib/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+
+const postSchema = z.object({
+  title: z.string().min(2, "Title is required"),
+  // author: z.string().min(2, "Author is required"),
+  mainImage: z
+    .any()
+    .refine((file) => file && file.length > 0, "Image is required"),
+  categories: z.array(z.string().min(1)).refine((val) => val.length > 0, {
+    message: "At least one category is required",
+  }),
+
+  publishedAt: z.string().optional(),
+  post: z.string().min(2, "Post content is required"),
+});
 
 const CreatePostForm = () => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [mainImage, setMainImage] = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [publishedAt, setPublishedAt] = useState("");
-  const [body, setBody] = useState("");
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    resolver: zodResolver(postSchema),
+  });
 
-  const handleImageChange = (event) => {
-    setMainImage(event.target.files[0]); // For simplicity, assuming single file upload
-  };
+  const [categoriesList, setCategoriesList] = useState([]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const { data: session } = useSession();
 
-    // Prepare the data for the post
-    const postData = {
-      title,
-      slug: {
-        _type: "slug",
-        current: title.toLowerCase().replace(/\s+/g, "-"),
-      },
-      author,
-      mainImage,
-      categories,
-      publishedAt,
-      body,
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categories = await client.fetch(
+        `*[_type == "category"]{_id, title}`
+      );
+      setCategoriesList(categories);
     };
+    fetchCategories();
+  }, []);
 
-    // Sanity API call to create the post
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    // formData.append("author", author._id); // Use fetched author ID
+    formData.append("categories", JSON.stringify(data.categories));
+    formData.append("mainImage", data.mainImage[0]);
+    formData.append("post", data.post);
     try {
-      const result = await client.create({
-        _type: "post",
-        title: postData.title,
-        slug: postData.slug,
-        author: { _type: "reference", _ref: postData.author },
-        mainImage: {
-          _type: "image",
-          asset: {
-            _type: "reference",
-            _ref: postData.mainImage.asset._id, // You'll need to upload the image first
-          },
-        },
-        categories: postData.categories.map((category) => ({
-          _type: "reference",
-          _ref: category,
-        })),
-        publishedAt: new Date().toISOString().split("T")[0],
-        body: postData.body,
+      // Prepare the FormData
+      const res = await fetch("/api/posts", {
+        method: "POST",
+        body: formData,
       });
-
-      console.log("Post created", result);
-    } catch (error) {
-      console.error("Error creating post:", error);
+      const json = await res.json();
+      if (!res.ok) {
+        throw new Error(json.error || "Failed to create post");
+      }
+      //todo: handle success
+    } catch (err) {
+      console.error("Error:", err);
     }
   };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
+      encType="multipart/form-data"
       className="max-w-2xl w-full mx-auto p-6 space-y-6 bg-white rounded-lg shadow-lg"
     >
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Create New Post</h2>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Title</label>
+        <label
+          htmlFor="title"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Title
+        </label>
         <input
+          id="title"
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          {...register("title")}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
         />
-      </div>
-
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Author
-        </label>
-        <input
-          type="text"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Categories (comma separated)
-        </label>
-        <input
-          type="text"
-          value={categories}
-          onChange={(e) => setCategories(e.target.value.split(","))}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Main Image
-        </label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-cyan-50 file:text-cyan-700 hover:file:bg-cyan-100"
-        />
+        {errors.title && (
+          <p className="text-red-500">{errors.title?.message}</p>
+        )}
       </div>
 
       {/* <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Published At
+        <label
+          htmlFor="author"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Author
         </label>
         <input
-          type="datetime-local"
-          value={publishedAt}
-          onChange={(e) => setPublishedAt(e.target.value)}
+          id="author"
+          type="text"
+          {...register("author")}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
         />
+        {errors.author && (
+          <p className="text-red-500">{errors.author?.message}</p>
+        )}
       </div> */}
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Body</label>
-        <textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          required
-          rows={6}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        <label
+          htmlFor="categories"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Categories
+        </label>
+        <select
+          id="categories"
+          multiple
+          {...register("categories")}
+          className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        >
+          {categoriesList.map((cat) => (
+            <option key={cat._id} value={cat._id}>
+              {cat.title}
+            </option>
+          ))}
+        </select>
+        {errors.categories && (
+          <p className="text-red-500">{errors.categories?.message}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <label
+          htmlFor="image"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Image
+        </label>
+        <input
+          id="image"
+          type="file"
+          accept="image/*"
+          {...register("mainImage")}
+          className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-cyan-50 file:text-cyan-700 hover:file:bg-cyan-100"
         />
+        {errors.mainImage && (
+          <p className="text-red-500">{errors.mainImage?.message}</p>
+        )}
+      </div>
+
+      <div data-color-mode="light" className="space-y-2">
+        <label
+          htmlFor="post"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Post
+        </label>
+
+        <MDEditor
+          id="post"
+          value={watch("post")}
+          onChange={(val) => setValue("post", val)}
+          height={300}
+          preview="edit"
+          textareaProps={{
+            placeholder: "Write your post content here.",
+          }}
+        />
+
+        {errors.post && <p className="text-red-500">{errors.post?.message}</p>}
       </div>
 
       <button

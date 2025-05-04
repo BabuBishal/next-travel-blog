@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} relative overflow-x-hidden bg-light`}
+        className={`${poppins.className} relative overflow-x-hidden bg-cyan-50`}
       >
         <Providers>
           <Navbar />

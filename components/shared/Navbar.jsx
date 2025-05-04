@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <nav
       className={clsx(
-        "w-full flex items-center pt-8 pb-4 mx-auto bg-cyan-50  relative border-none shadow-sm duration-200",
+        "w-full flex items-center pt-8 pb-4 mx-auto bg-[#d8f5f8] relative border-none shadow-sm duration-200",
         isScrolling && "sticky -top-4  z-10  shadow-lg duration-200"
       )}
     >
