@@ -11,7 +11,7 @@ import blogData from "@/constants/blogData";
 const page = ({ searchParams }) => {
   const post = searchParams;
   return (
-    <div className="w-full mx-5 lg:w-[60%] lg:mx-auto">
+    <div className="w-full mx-5 my-5 lg:w-[60%] lg:mx-auto">
       <div className="w-full h-[400px] relative mb-5 ">
         <Image
           alt={`image for ${post.title}`}
@@ -48,7 +48,7 @@ const page = ({ searchParams }) => {
               alt={`image of ${post.author}`}
               className="rounded-full w-20 h-20 object-cover"
             />
-            <div className="flex flex-col gap-1" >
+            <div className="flex flex-col gap-1">
               <span>{post.author}</span>
               <span>{post.date}</span>
             </div>
@@ -56,19 +56,21 @@ const page = ({ searchParams }) => {
         </article>
       </div>
 
-      <section className="py-6 sm:py-12 dark:bg-gray-100 dark:text-gray-800">
-	<div className="container p-6 mx-auto space-y-8">
-		<div className="space-y-2 text-center">
-			<h2 className="text-3xl font-bold">You may also like</h2>
-			<p className="font-serif text-sm dark:text-gray-600">Explore more blogs here.</p>
-		</div>
-		<div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
-		{blogData.slice(0,4).map((blog, id) => (
-      <BlogCard key={id} post={blog} />
-    ))}
-		</div>
-	</div>
-</section>
+      <section className="py-6 sm:py-12 dark:bg-cyan-100/30 dark:text-gray-800">
+        <div className="container p-6 mx-auto space-y-8">
+          <div className="space-y-2 text-center">
+            <h2 className="text-3xl font-bold">You may also like</h2>
+            <p className="font-serif text-sm dark:text-gray-600">
+              Explore more blogs here.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
+            {blogData.slice(0, 4).map((blog, id) => (
+              <BlogCard key={id} post={blog} />
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
