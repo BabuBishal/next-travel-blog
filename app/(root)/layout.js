@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { Providers } from "@/lib/providers/SessionProvider";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <Navbar />
+          <Toaster />
           {children}
           <Footer />
         </Providers>

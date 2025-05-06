@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { client } from "@/sanity/lib/client";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 const postSchema = z.object({
   title: z.string().min(2, "Title is required"),
@@ -28,13 +28,12 @@ const CreatePostForm = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm({
     resolver: zodResolver(postSchema),
   });
 
   const [categoriesList, setCategoriesList] = useState([]);
-
-  const { data: session } = useSession();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -59,12 +58,17 @@ const CreatePostForm = () => {
         method: "POST",
         body: formData,
       });
-      const json = await res.json();
+      const result = await res.json();
       if (!res.ok) {
-        throw new Error(json.error || "Failed to create post");
+        toast.error("Failed to create post");
+        throw new Error(result.error || "Failed to create post");
       }
       //todo: handle success
+      toast.success("Post created successfully");
+      reset();
     } catch (err) {
+      toast.error("Error:", err);
+
       console.error("Error:", err);
     }
   };
