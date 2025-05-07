@@ -12,7 +12,6 @@ import { urlFor } from "@/sanity/lib/image";
 
 const page = async ({ searchParams }) => {
   const params = searchParams;
-  // Replace with the actual ID or pass dynamically
   const post = await client.fetch(
     `*[_type == "post" && _id == $id][0]{
     _id,

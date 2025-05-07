@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import Tag from "../ui/Tag";
@@ -6,9 +7,14 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { urlFor } from "@/sanity/lib/image";
 
 const BlogCard = ({ post }) => {
-  const imageUrl = urlFor(post?.mainImage).url();
-  const imageAlt = post?.mainImage?.asset?.alt;
-  console.log(post);
+  const imageUrl = post?.mainImage
+    ? urlFor(post.mainImage).url()
+    : "/fallback-img.png";
+
+  const imageAlt = post?.mainImage
+    ? post.mainImage.asset?.alt
+    : `image for blog`;
+  // console.log(post);
 
   return (
     <article className="relative rounded-lg overflow-hidden">
@@ -20,7 +26,7 @@ const BlogCard = ({ post }) => {
           priority
           quality={100}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          alt={imageAlt || `image for ${post.title}`}
+          alt={imageAlt}
           className="object-cover"
         />
         <Overlay />
@@ -31,7 +37,7 @@ const BlogCard = ({ post }) => {
             <Tag key={_id} text={title} />
           ))}
         </div>
-        <h3 className="text-3xl font-extrabold uppercase text-white drop-shadow-lg">
+        <h3 className="text-3xl font-extrabold uppercase text-cyan-50  drop-shadow-lg">
           {post?.title}
         </h3>
       </div>

@@ -63,7 +63,6 @@ const CreatePostForm = () => {
         toast.error("Failed to create post");
         throw new Error(result.error || "Failed to create post");
       }
-      //todo: handle success
       toast.success("Post created successfully");
       reset();
     } catch (err) {

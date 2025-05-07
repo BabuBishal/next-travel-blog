@@ -18,7 +18,7 @@ const BlogCardSkeleton = () => {
         <span className=" bg-cyan-200 w-1/2 h-8 rounded-2xl"></span>
       </div>
       <div className="absolute bottom-0 bg-cyan-200 rounded-tl-lg right-0 p-5">
-        <AiOutlineArrowRight size={30} className="text-white" />
+        <AiOutlineArrowRight size={30} className="text-cyan-50" />
       </div>
     </article>
   );

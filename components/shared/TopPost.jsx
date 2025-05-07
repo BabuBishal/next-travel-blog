@@ -7,7 +7,7 @@ import Overlay from "../ui/Overlay";
 const TopPost = () => {
   const topPost = blogData.filter((blog) => blog.topPost === true);
   return (
-    <section className="">
+    <section className="w-1/3  mb-5">
       <div className="w-full text-center">
         <h2 className="text-center text-2xl font-extrabold uppercase text-[#292828] inline-blick px-2 mb-10">
           Top Posts
@@ -19,7 +19,7 @@ const TopPost = () => {
             href={{ pathname: `/blogs/${post.id}`, query: { ...post } }}
             key={id}
           >
-            <article>
+            <article className="rounded-sm">
               <div className="relative cursor-pointer ">
                 <Image
                   src={post.image}

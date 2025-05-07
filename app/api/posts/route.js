@@ -80,7 +80,7 @@ export const POST = async (req) => {
         _type: "reference",
         _ref: author._id,
       },
-      publishedAt: new Date().toISOString().split("T")[0],
+      publishedAt: new Date().toISOString(),
     });
 
     return new Response(JSON.stringify({ post: newPost }), { status: 200 });
