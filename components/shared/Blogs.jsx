@@ -52,13 +52,17 @@ const Blogs = () => {
         </h2>
       </div>
       <div className="flex flex-col gap-10 h-full">
-        {loading
-          ? Array.from({ length: 3 }, (_, index) => (
-              <BlogCardSkeleton key={index} />
-            ))
-          : blogs
-              .slice(0, visibleBlogs)
-              .map((post) => <BlogCard key={post._id} post={post} />)}
+        {!blogs ? (
+          <p>No blogs available</p>
+        ) : loading ? (
+          Array.from({ length: 3 }, (_, index) => (
+            <BlogCardSkeleton key={index} />
+          ))
+        ) : (
+          blogs
+            .slice(0, visibleBlogs)
+            .map((post) => <BlogCard key={post._id} post={post} />)
+        )}
 
         {visibleBlogs < blogs.length && (
           <div className="flex justify-center">

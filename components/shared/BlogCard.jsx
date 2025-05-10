@@ -7,20 +7,20 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { urlFor } from "@/sanity/lib/image";
 
 const BlogCard = ({ post }) => {
+  const fallbackImage = "/fallback-img.png";
+  const fallbackImageAlt = "image for blog";
+
   const imageUrl = post?.mainImage
     ? urlFor(post.mainImage).url()
-    : "/fallback-img.png";
+    : fallbackImage;
 
-  const imageAlt = post?.mainImage
-    ? post.mainImage.asset?.alt
-    : `image for blog`;
-  // console.log(post);
+  const imageAlt = post?.mainImage ? post.mainImage?.alt : fallbackImageAlt;
 
   return (
     <article className="relative rounded-lg overflow-hidden">
       <div className=" h-[450px] relative ">
         <Image
-          src={imageUrl || ""}
+          src={imageUrl}
           width={800}
           height={450}
           priority

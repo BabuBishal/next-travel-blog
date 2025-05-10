@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Tag from "../ui/Tag";
 import Overlay from "../ui/Overlay";
+import TopPostCard from "./TopPostCard";
 
 const TopPost = () => {
   const topPost = blogData.filter((blog) => blog.topPost === true);
@@ -15,33 +16,7 @@ const TopPost = () => {
       </div>
       <div className="flex h-full flex-col gap-12 items-center">
         {topPost.map((post, id) => (
-          <Link
-            href={{ pathname: `/blogs/${post.id}`, query: { ...post } }}
-            key={id}
-          >
-            <article className="rounded-sm">
-              <div className="relative cursor-pointer ">
-                <Image
-                  src={post.image}
-                  width={800}
-                  height={800}
-                  alt={`Image for ${post.title}`}
-                  loading="lazy"
-                />
-                <Overlay />
-              </div>
-              <div className="  flex gap-2 md:gap-5 items-center ">
-                {post.tags.map((tag, id) => (
-                  <Tag key={id} text={tag} />
-                ))}
-              </div>
-              <h3 className=" text-xl font-bold">{post.title}</h3>
-              <div className="flex gap-4 justify-center mt-2 text-tertiary">
-                <span className="font-normal">By: {post.author}</span>
-                <span className="font-normal">Date: {post.date}</span>
-              </div>
-            </article>
-          </Link>
+          <TopPostCard post={post} key={id} />
         ))}
       </div>
     </section>

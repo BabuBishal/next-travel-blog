@@ -9,9 +9,7 @@ const FeaturedPostCard = ({ post }) => {
     ? urlFor(post.mainImage).url()
     : "/fallback-img.png";
 
-  const imageAlt = post?.mainImage
-    ? post.mainImage.asset?.alt
-    : `image for blog`;
+  const imageAlt = post?.mainImage ? post.mainImage?.alt : `image for blog`;
   return (
     <article className="flex flex-col gap-3 items-center text-center relative">
       <Link href={{ pathname: `/blogs/${post?.title}`, query: post?._id }}>
