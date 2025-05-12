@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, Suspense } from "react";
-import blogData from "@/constants/blogData";
+// import blogData from "@/constants/blogData";
 import BlogCard from "./BlogCard";
 import Button from "../ui/Button";
 import { client } from "@/sanity/lib/client";

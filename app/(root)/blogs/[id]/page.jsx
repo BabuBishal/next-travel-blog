@@ -1,18 +1,22 @@
 import Tag from "@/components/ui/Tag";
 import Image from "next/image";
-import BlogCard from "@/components/shared/BlogCard";
+// import BlogCard from "@/components/shared/BlogCard";
+import { PortableText } from "@portabletext/react";
+
 import {
   AiOutlineFacebook,
   AiOutlineInstagram,
   AiOutlineTwitter,
 } from "react-icons/ai";
-import blogData from "@/constants/blogData";
+// import blogData from "@/constants/blogData";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
+import { formatDate } from "@/lib/utils";
 
 const page = async ({ searchParams }) => {
-  const params = searchParams;
-  const post = await client.fetch(
+  const { id } = searchParams;
+
+  const postData = await client.fetch(
     `*[_type == "post" && _id == $id][0]{
     _id,
     title,
@@ -23,48 +27,86 @@ const page = async ({ searchParams }) => {
     categories[]->{_id, title},
     post
   }`,
-    { id: params }
+    { id: id }
   );
 
-  // const imageUrl = urlFor(post?.mainImage).url();
+  const fallbackImage = "/fallback-img.png";
+  const fallbackImageAlt = "image for blog";
 
-  console.log("params", params);
+  const imageUrl = postData.mainImage
+    ? urlFor(postData.mainImage).url()
+    : fallbackImage;
+
+  const imageAlt = postData.mainImage
+    ? postData.mainImage.alt
+    : fallbackImageAlt;
+  const formattedDate = formatDate(postData?.publishedAt);
+  const authorName = postData.author.name;
+
   return (
-    <div className="w-full mx-5 my-5 lg:w-[60%] lg:mx-auto">
-      <div className="w-full h-[400px] relative mb-5 ">
-        {/* <Image
-          alt={`image for ${post?.title}`}
-          src={imageUrl || ""}
-          width={800}
-          height={400}
-          priority
-          quality={100}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover"
-        /> */}
-        {}
-      </div>
-      <div className="  flex gap-2 md:gap-5 flex-wrap">
-        {post?.categories?.map(({ title, _id }) => (
-          <Tag key={_id} text={title} />
-        ))}
-      </div>
-      <h1 className="text-4xl uppercase font-extrabold my-3 ">{post?.title}</h1>
-      <div className="flex gap-5 md:gap-20 relative mt-10 flex-col md:flex-row">
-        <aside className="md:sticky md:top-2/4 md:h-screen">
-          <span className="uppercase text-2xl font-extrabold text-tertiary">
-            {" "}
-            Share:
-          </span>
-          <div className="flex text-3xl gap-5 text-gray-400 mt-2 [&<*]:border">
-            <AiOutlineFacebook />
-            <AiOutlineInstagram />
-            <AiOutlineTwitter />
+    <article className="w-full max-md:px-5 my-5 lg:w-[60%] lg:mx-auto">
+      <section className="flex flex-col gap-5">
+        <div>
+          <div className="w-full  relative mb-5 overflow-hidden h-[600px]">
+            <Image
+              alt={imageAlt}
+              src={imageUrl}
+              width={1050}
+              height={600}
+              priority
+              quality={100}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="h-full w-full object-cover"
+            />
+            {}
           </div>
-        </aside>
-        <article>
+          <h1 className="text-4xl uppercase font-extrabold my-3 ">
+            {postData.title}
+          </h1>
+          <div className="  flex gap-2 md:gap-5 flex-wrap">
+            {postData.categories.map(({ title, _id }) => (
+              <Tag key={_id} text={title} />
+            ))}
+          </div>
+          {/* <div className="w-full h-0.5 bg-cyan-100 mt-5"></div> */}
+        </div>
+        <div className="w-full flex-1 h-fit mt-5">
+          <PortableText
+            value={postData.post}
+            components={{
+              block: {
+                h1: ({ children }) => (
+                  <h1 className="text-3xl font-bold my-5">{children}</h1>
+                ),
+                h2: ({ children }) => (
+                  <h2 className="text-2xl font-bold my-5">{children}</h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="text-xl font-bold my-5">{children}</h3>
+                ),
+                normal: ({ children }) => (
+                  <p className="my-5 text-lg">{children}</p>
+                ),
+              },
+            }}
+          />
+          <div className="w-full h-0.5 bg-cyan-100 mt-5"></div>
+        </div>
+
+        <div className="flex gap-5 md:gap-20 relative mt-5 flex-col md:flex-row justify-start items-start">
+          <aside className=" w-full ">
+            <span className="uppercase text-2xl font-extrabold text-tertiary">
+              Share:
+            </span>
+            <div className="flex text-3xl gap-5 text-gray-400 mt-2 [&<*]:border">
+              <AiOutlineFacebook className="hover:text-cyan-300 duration-200 ease-in-out cursor-pointer" />
+              <AiOutlineInstagram className="hover:text-cyan-300 duration-200 ease-in-out cursor-pointer" />
+              <AiOutlineTwitter className="hover:text-cyan-300 duration-200 ease-in-out cursor-pointer" />
+            </div>
+          </aside>
+
           {/* <p className="text-xl">{post.description}</p> */}
-          <div className="flex items-center gap-5 mt-5">
+          <div className="w-full flex items-center gap-5 ">
             {/* <Image
               src={post.authorImg}
               width={500}
@@ -72,15 +114,15 @@ const page = async ({ searchParams }) => {
               alt={`image of ${post.author}`}
               className="rounded-full w-20 h-20 object-cover"
             /> */}
-            <div className="flex flex-col gap-1">
-              <span>{post?.author}</span>
-              <span>{post?.publishedAt}</span>
+            <div className="flex flex-col gap-1 italic">
+              <span>{authorName}</span>
+              <span>{formattedDate}</span>
             </div>
           </div>
-        </article>
-      </div>
+        </div>
+      </section>
 
-      <section className="py-6 sm:py-12 dark:bg-cyan-100/30 dark:text-gray-800">
+      <section className="py-6 sm:py-12 dark:bg-cyan-100/30 mt-20 dark:text-gray-800">
         <div className="container p-6 mx-auto space-y-8">
           <div className="space-y-2 text-center">
             <h2 className="text-3xl font-bold">You may also like</h2>
@@ -95,7 +137,7 @@ const page = async ({ searchParams }) => {
           </div> */}
         </div>
       </section>
-    </div>
+    </article>
   );
 };
 

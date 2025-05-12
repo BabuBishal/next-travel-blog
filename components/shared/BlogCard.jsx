@@ -15,7 +15,6 @@ const BlogCard = ({ post }) => {
     : fallbackImage;
 
   const imageAlt = post?.mainImage ? post.mainImage?.alt : fallbackImageAlt;
-
   return (
     <article className="relative rounded-lg overflow-hidden">
       <div className=" h-[450px] relative ">
@@ -42,7 +41,10 @@ const BlogCard = ({ post }) => {
         </h3>
       </div>
       <Link
-        href={{ pathname: `/blogs/${post?.title}`, query: post?.id }}
+        href={{
+          pathname: `/blogs/${post?.slug?.current}`,
+          query: { id: post?._id },
+        }}
         className="absolute bottom-0 right-0 bg-cyan-400 hover:bg-cyan-500 p-5  text-white rounded-tl-lg z-6 duration-200 cursor-pointer"
       >
         <AiOutlineArrowRight size={30} />
