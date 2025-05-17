@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { client } from "@/sanity/lib/client";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { categoriesQuery } from "@/lib/queries";
 
 const postSchema = z.object({
   title: z.string().min(2, "Title is required"),
@@ -37,9 +38,7 @@ const CreatePostForm = () => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const categories = await client.fetch(
-        `*[_type == "category"]{_id, title}`
-      );
+      const categories = await client.fetch(categoriesQuery);
       setCategoriesList(categories);
     };
     fetchCategories();
@@ -47,10 +46,11 @@ const CreatePostForm = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
+    const imageAlt = data.mainImage[0].name.split(".")[0];
     formData.append("title", data.title);
-    // formData.append("author", author._id); // Use fetched author ID
     formData.append("categories", JSON.stringify(data.categories));
     formData.append("mainImage", data.mainImage[0]);
+    formData.append("mainImageAlt", imageAlt);
     formData.append("post", data.post);
     try {
       // Prepare the FormData
@@ -63,7 +63,11 @@ const CreatePostForm = () => {
         toast.error("Failed to create post");
         throw new Error(result.error || "Failed to create post");
       }
-      toast.success("Post created successfully");
+      toast.promise(res, {
+        loading: "Creating Post...",
+        success: "Post created successfully!",
+        error: "Error",
+      });
       reset();
     } catch (err) {
       toast.error("Error:", err);

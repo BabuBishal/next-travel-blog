@@ -1,22 +1,11 @@
 import { client } from "@/sanity/lib/client";
 import FeaturedPostCard from "./FeaturedPostCard";
 import HeroFeatured from "./HeroFeatured";
+import { featuredPostsQuery } from "@/lib/queries";
 // import BlogCard from "./BlogCard";
 
 const Hero = async () => {
-  const featured = await client.fetch(`
-    *[_type == "featuredPosts" && title == "Featured"][0]{
-    posts[]->{
-      _id,
-      title,
-      slug,
-      mainImage,
-      author->{name, email},
-      categories[]->{title},
-      publishedAt,
-      post
-    }
-  }`);
+  const featured = await client.fetch(featuredPostsQuery);
 
   const topFeatured = featured?.posts?.slice(0, 1);
   const remainingFeatured = featured?.posts?.slice(1, 5);

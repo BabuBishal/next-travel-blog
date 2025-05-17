@@ -1,6 +1,7 @@
 import { writeClient } from "@/sanity/lib/writeClient";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { authorsQuery } from "@/lib/queries";
 
 export const POST = async (req) => {
   try {
@@ -8,6 +9,8 @@ export const POST = async (req) => {
     const title = formData.get("title");
     const post = formData.get("post");
     const mainImage = formData.get("mainImage");
+    const imageAlt = formData.get("mainImageAlt") || title;
+
     const categories = JSON.parse(formData.get("categories") || "[]");
 
     const session = await getServerSession(authOptions);
@@ -21,10 +24,7 @@ export const POST = async (req) => {
     }
 
     // Fetch or create author
-    let author = await writeClient.fetch(
-      `*[_type == "author" && email == $email][0]{_id}`,
-      { email }
-    );
+    let author = await writeClient.fetch(authorsQuery, { email });
 
     if (!author?._id) {
       author = await writeClient.create({
@@ -70,6 +70,7 @@ export const POST = async (req) => {
           _type: "reference",
           _ref: imageAsset._id,
         },
+        alt: imageAlt,
       },
       categories: categories.map((id) => ({
         _type: "reference",

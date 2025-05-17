@@ -91,11 +91,11 @@ const Navbar = () => {
 
                 {dropdownOpen && (
                   <div
-                    className="absolute -right-10 top-10 w-52 h-72 bg-transparent p-5  overflow-hidden z-50"
+                    className="absolute -right-10 top-10 w-64 h-72 bg-transparent p-5  overflow-hidden z-50"
                     onMouseOver={() => setDropdownOpen(true)}
                     onMouseOut={() => setDropdownOpen(false)}
                   >
-                    <div className="p-5 w-full h-full flex flex-col gap-2 justify-center items-center shadow-xl rounded-md bg-cyan-50">
+                    <div className="p-5 w-full h-full flex flex-col gap-2 justify-center items-center shadow-xl rounded-md bg-[#fcfcf7]">
                       <div className="h-20 w-20 rounded-full ">
                         <img
                           src={session?.user?.image || "/hacker.png"}

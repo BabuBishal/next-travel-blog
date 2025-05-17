@@ -12,23 +12,12 @@ import {
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { formatDate } from "@/lib/utils";
+import { blogPostByIdQuery } from "@/lib/queries";
 
 const page = async ({ searchParams }) => {
   const { id } = searchParams;
 
-  const postData = await client.fetch(
-    `*[_type == "post" && _id == $id][0]{
-    _id,
-    title,
-    slug,
-    publishedAt,
-    mainImage,
-    author->{_id, name, email},
-    categories[]->{_id, title},
-    post
-  }`,
-    { id: id }
-  );
+  const postData = await client.fetch(blogPostByIdQuery, { id: id });
 
   const fallbackImage = "/fallback-img.png";
   const fallbackImageAlt = "image for blog";
