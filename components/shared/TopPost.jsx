@@ -1,48 +1,24 @@
-import blogData from "@/constants/blogData";
-import Image from "next/image";
-import Link from "next/link";
-import Tag from "../ui/Tag";
-import Overlay from "../ui/Overlay";
+import { Suspense } from "react";
+import TopPostCard from "./TopPostCard";
+import TopPostsSkeleton from "../skeletons/TopPostsSkeleton";
+import { client } from "@/sanity/lib/client";
+import { topPostsQuery } from "@/lib/queries";
 
-const TopPost = () => {
-  const topPost = blogData.filter((blog) => blog.topPost === true);
+const TopPost = async () => {
+  const topPost = await client.fetch(topPostsQuery);
   return (
-    <section className="">
+    <section className="w-1/3  mb-5">
       <div className="w-full text-center">
         <h2 className="text-center text-2xl font-extrabold uppercase text-[#292828] inline-blick px-2 mb-10">
           Top Posts
         </h2>
       </div>
       <div className="flex h-full flex-col gap-12 items-center">
-        {topPost.map((post, id) => (
-          <Link
-            href={{ pathname: `/blogs/${post.id}`, query: { ...post } }}
-            key={id}
-          >
-            <article>
-              <div className="relative cursor-pointer ">
-                <Image
-                  src={post.image}
-                  width={800}
-                  height={800}
-                  alt={`Image for ${post.title}`}
-                  loading="lazy"
-                />
-                <Overlay />
-              </div>
-              <div className="  flex gap-2 md:gap-5 items-center ">
-                {post.tags.map((tag, id) => (
-                  <Tag key={id} text={tag} />
-                ))}
-              </div>
-              <h3 className=" text-xl font-bold">{post.title}</h3>
-              <div className="flex gap-4 justify-center mt-2 text-tertiary">
-                <span className="font-normal">By: {post.author}</span>
-                <span className="font-normal">Date: {post.date}</span>
-              </div>
-            </article>
-          </Link>
-        ))}
+        <Suspense fallback={<TopPostsSkeleton />}>
+          {topPost?.posts?.map((post) => (
+            <TopPostCard post={post} key={post._id} />
+          ))}
+        </Suspense>
       </div>
     </section>
   );
