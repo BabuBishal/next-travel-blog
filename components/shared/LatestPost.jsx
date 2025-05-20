@@ -4,6 +4,7 @@
 // import blogData from "@/constants/blogData";
 import { client } from "@/sanity/lib/client";
 import BlogCard from "./BlogCard";
+import { latestPostsQuery } from "@/lib/queries";
 // import Button from "../ui/Button";
 
 const LatestPost = async () => {
@@ -15,15 +16,7 @@ const LatestPost = async () => {
   // const latestpost = blogData.filter((blog) => blog.latestPost === true);
 
   const recentPosts = await client.fetch(
-    `*[_type == "post"] | order(publishedAt desc)[0...5] {
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    categories[]->{_id, title},
-    author->{name}
-  }`
+  latestPostsQuery
   );
 
   return (

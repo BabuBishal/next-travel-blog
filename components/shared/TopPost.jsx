@@ -1,12 +1,11 @@
-import blogData from "@/constants/blogData";
-import Image from "next/image";
-import Link from "next/link";
-import Tag from "../ui/Tag";
-import Overlay from "../ui/Overlay";
+import { Suspense } from "react";
 import TopPostCard from "./TopPostCard";
+import TopPostsSkeleton from "../skeletons/TopPostsSkeleton";
+import { client } from "@/sanity/lib/client";
+import { topPostsQuery } from "@/lib/queries";
 
-const TopPost = () => {
-  const topPost = blogData.filter((blog) => blog.topPost === true);
+const TopPost = async () => {
+  const topPost = await client.fetch(topPostsQuery);
   return (
     <section className="w-1/3  mb-5">
       <div className="w-full text-center">
@@ -15,9 +14,11 @@ const TopPost = () => {
         </h2>
       </div>
       <div className="flex h-full flex-col gap-12 items-center">
-        {topPost.map((post, id) => (
-          <TopPostCard post={post} key={id} />
-        ))}
+        <Suspense fallback={<TopPostsSkeleton />}>
+          {topPost?.posts?.map((post) => (
+            <TopPostCard post={post} key={post._id} />
+          ))}
+        </Suspense>
       </div>
     </section>
   );

@@ -2,11 +2,15 @@ import { urlFor } from "@/sanity/lib/image";
 import React from "react";
 import Overlay from "../ui/Overlay";
 import Link from "next/link";
+import Image from "next/image";
 
 const HeroFeatured = ({ post }) => {
+  console.log("hero featured post", post);
+
   const imageUrl = post?.mainImage
     ? urlFor(post.mainImage).url()
     : "/fallback-img.png";
+  console.log("imgUrl", imageUrl);
 
   const imageAlt = post?.mainImage
     ? post.mainImage?.alt
@@ -18,16 +22,20 @@ const HeroFeatured = ({ post }) => {
         className="w-full h-full "
       >
         <div className="relative w-full max-h-[700px] overflow-hidden">
-          <img
+          <Image
             src={imageUrl}
             alt={imageAlt}
+            width={1200}
+            height={700}
+            priority
+            quality={100}
             className="w-full h-full object-cover origin-center"
           />
           <Overlay />
           <div className="absolute bottom-8 w-full  flex gap-2 md:gap-5  justify-center">
-            {post?.categories?.map((tag) => (
-              <span key={tag?._id} className="text-white text-lg">
-                {tag?.title}
+            {post?.categories?.map(({ title, _id }) => (
+              <span key={_id} className="text-white text-lg">
+                {title}
               </span>
             ))}
             <h2 className="absolute  bottom-12 font-bold text-white text-2xl md:text-4xl">
