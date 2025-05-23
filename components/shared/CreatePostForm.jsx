@@ -7,6 +7,7 @@ import { client } from "@/sanity/lib/client";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { categoriesQuery } from "@/lib/queries";
+import { useRouter } from "next/navigation";
 
 const postSchema = z.object({
   title: z.string().min(2, "Title is required"),
@@ -35,6 +36,7 @@ const CreatePostForm = () => {
   });
 
   const [categoriesList, setCategoriesList] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -68,6 +70,7 @@ const CreatePostForm = () => {
         success: "Post created successfully!",
         error: "Error",
       });
+      router.push("/profile");
       reset();
     } catch (err) {
       toast.error("Error:", err);
@@ -80,7 +83,7 @@ const CreatePostForm = () => {
     <form
       onSubmit={handleSubmit(onSubmit)}
       encType="multipart/form-data"
-      className="max-w-2xl w-full mx-auto p-6 space-y-6 bg-white rounded-lg shadow-lg"
+      className="max-w-2xl w-full mx-auto p-6 space-y-6 bg-white/90 rounded-lg shadow-lg"
     >
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Create New Post</h2>
 
