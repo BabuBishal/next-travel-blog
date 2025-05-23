@@ -119,19 +119,19 @@ const MobileMenu = ({
               {!session ? (
                 <Button text="Log In" onClick={handleLoginClick} />
               ) : (
-                <div className="flex flex-col justify-center gap-2 ">
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={session.user.image}
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-teal-500 transition"
-                    />
+                <div className="flex flex-col justify-center gap-4 ">
+                  <div className=" flex-col justify-center items-center gap-4">
                     <Link
                       href="/profile"
-                      className="w-full block px-4 py-2 hover:bg-gray-200 "
+                      className="w-full flex items-center gap-4 justify-start  px-4 rounded-md py-2 bg-cyan-100 hover:bg-cyan-200 "
                       onClick={() => setDropdownOpen(false)}
                     >
-                      Profile
+                      <img
+                        src={session.user.image}
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full cursor-pointer border-2 border-cyan-300 hover:border-cyan-500 transition"
+                      />
+                      <span>Profile</span>
                     </Link>
                   </div>
                   <Button text="Sign Out" onClick={handleLogoutClick} />
