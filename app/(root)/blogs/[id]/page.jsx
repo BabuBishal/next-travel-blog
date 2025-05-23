@@ -13,6 +13,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { formatDate } from "@/lib/utils";
 import { blogPostByIdQuery } from "@/lib/queries";
+import PortableTextRenderer from "@/components/shared/PortableTextRenderer";
 
 const page = async ({ searchParams }) => {
   const { id } = searchParams;
@@ -33,8 +34,8 @@ const page = async ({ searchParams }) => {
   const authorName = postData.author.name;
 
   return (
-    <article className="w-full max-md:px-5 my-5 lg:w-[60%] lg:mx-auto">
-      <section className="flex flex-col gap-5">
+    <article className="w-full max-md:px-5 my-5 lg:w-[60%] lg:mx-auto ">
+      <section className="flex flex-col gap-5 items-center">
         <div>
           <div className="w-full  relative mb-5 overflow-hidden h-[600px]">
             <Image
@@ -49,36 +50,18 @@ const page = async ({ searchParams }) => {
             />
             {}
           </div>
-          <h1 className="text-4xl uppercase font-extrabold my-3 ">
-            {postData.title}
-          </h1>
           <div className="  flex gap-2 md:gap-5 flex-wrap">
             {postData.categories.map(({ title, _id }) => (
               <Tag key={_id} text={title} />
             ))}
           </div>
+          <h1 className="text-4xl uppercase font-extrabold mt-3 prose lg:prose-2xl">
+            {postData.title}
+          </h1>
           {/* <div className="w-full h-0.5 bg-cyan-100 mt-5"></div> */}
         </div>
-        <div className="w-full flex-1 h-fit mt-5">
-          <PortableText
-            value={postData.post}
-            components={{
-              block: {
-                h1: ({ children }) => (
-                  <h1 className="text-3xl font-bold my-5">{children}</h1>
-                ),
-                h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold my-5">{children}</h2>
-                ),
-                h3: ({ children }) => (
-                  <h3 className="text-xl font-bold my-5">{children}</h3>
-                ),
-                normal: ({ children }) => (
-                  <p className="my-5 text-lg">{children}</p>
-                ),
-              },
-            }}
-          />
+        <div className="w-full flex-1 h-fit prose lg:prose-xl">
+          <PortableTextRenderer value={postData.post} />
           <div className="w-full h-0.5 bg-cyan-100 mt-5"></div>
         </div>
 

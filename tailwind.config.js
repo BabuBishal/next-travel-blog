@@ -15,9 +15,10 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
-        aladin: ["Aladin"]
-      }
+        aladin: ["Aladin"],
+      },
     },
   },
-  plugins: [],
+
+  plugins: [require("@tailwindcss/typography")],
 };

@@ -14,7 +14,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
-  const [activeLinks, setActiveLinks] = useState([]);
+  const [activeLinks, setActiveLinks] = useState(navLinks);
 
   useEffect(() => {
     const updatedLinks = navLinks.map((link) => ({
