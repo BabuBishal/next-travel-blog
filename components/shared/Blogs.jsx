@@ -14,9 +14,8 @@ const Blogs = ({ blogPromise }) => {
 
   const blogs = use(blogPromise);
 
-
   return (
-    <section className="w-full max-w-2/3 mb-5">
+    <section className="w-full  mb-5">
       <div className="w-full text-center">
         <h2 className="text-center text-3xl font-extrabold uppercase text-secondary inline-block px-2 mb-10">
           All Posts

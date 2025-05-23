@@ -17,7 +17,7 @@ const TopPostCard = ({ post }) => {
   return (
     <Link
       href={{ pathname: `/blogs/${post?.title}`, query: { id: post?._id } }}
-      className="shadow-md p-2 "
+      className="hover:shadow-md p-2 duration-200 "
     >
       <article className="rounded-sm">
         <div className="relative cursor-pointer ">
