@@ -2,7 +2,7 @@
 
 import { useState, use } from "react";
 
-import BlogCard from "./BlogCard";
+import BlogCard from "./BlogCard1";
 import Button from "../ui/Button";
 
 const Blogs = ({ blogPromise }) => {

@@ -1,7 +1,6 @@
 import Tag from "@/components/ui/Tag";
 import Image from "next/image";
 // import BlogCard from "@/components/shared/BlogCard";
-import { PortableText } from "@portabletext/react";
 
 import {
   AiOutlineFacebook,
