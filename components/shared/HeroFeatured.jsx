@@ -5,8 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 const HeroFeatured = ({ post }) => {
-  console.log("hero featured post", post);
-
   const imageUrl = post?.mainImage
     ? urlFor(post.mainImage).url()
     : "/fallback-img.png";

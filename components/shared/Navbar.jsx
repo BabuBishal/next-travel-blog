@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <nav
       className={clsx(
-        "w-full flex items-center pt-8 pb-4 mx-auto bg-[#d8f5f8] relative border-none shadow-sm duration-200",
+        "w-full flex items-center pt-8 pb-4 mx-auto bg-sky-100 relative border-none shadow-sm duration-200",
         isScrolling && "sticky -top-4  z-10  shadow-lg duration-200"
       )}
     >
@@ -95,7 +95,7 @@ const Navbar = () => {
                     onMouseOver={() => setDropdownOpen(true)}
                     onMouseOut={() => setDropdownOpen(false)}
                   >
-                    <div className="p-5 w-full h-full flex flex-col gap-2 justify-center items-center shadow-xl rounded-md bg-[#fcfcf7]">
+                    <div className="p-5 w-full h-full flex flex-col gap-2 justify-center items-center shadow-lg rounded-md bg-sky-50">
                       <div className="h-20 w-20 rounded-full ">
                         <img
                           src={session?.user?.image || "/hacker.png"}
