@@ -33,7 +33,7 @@ const BlogCard = ({ post }) => {
       <div className="absolute w-full h-full top-0 p-5 flex flex-col justify-start">
         <div className="  flex gap-2 md:gap-5 flex-wrap">
           {post?.categories?.map(({ title, _id }) => (
-            <Tag key={_id} text={title} />
+            <Tag key={_id + title} text={title} />
           ))}
         </div>
         <h3 className="text-3xl font-extrabold uppercase text-cyan-50  drop-shadow-lg">
