@@ -20,7 +20,7 @@ const FeaturedPostCard = ({ post }) => {
       </Link>
       <div className="  flex gap-2 md:gap-5 items-center justify-center">
         {post?.categories?.map(({ title, _id }) => (
-          <Tag key={_id} text={title} />
+          <Tag key={_id + title} text={title} />
         ))}
       </div>
       <h3 className="px-5 text-xl">{post?.title}</h3>

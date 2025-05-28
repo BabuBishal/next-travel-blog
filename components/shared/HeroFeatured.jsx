@@ -8,7 +8,6 @@ const HeroFeatured = ({ post }) => {
   const imageUrl = post?.mainImage
     ? urlFor(post.mainImage).url()
     : "/fallback-img.png";
-  console.log("imgUrl", imageUrl);
 
   const imageAlt = post?.mainImage
     ? post.mainImage?.alt
@@ -32,7 +31,7 @@ const HeroFeatured = ({ post }) => {
           <Overlay />
           <div className="absolute bottom-8 w-full  flex gap-2 md:gap-5  justify-center">
             {post?.categories?.map(({ title, _id }) => (
-              <span key={_id} className="text-white text-lg">
+              <span key={_id + title} className="text-white text-lg">
                 {title}
               </span>
             ))}

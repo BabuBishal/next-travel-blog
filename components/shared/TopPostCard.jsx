@@ -26,7 +26,7 @@ const TopPostCard = ({ post }) => {
         </div>
         <div className="  flex gap-2 md:gap-5 items-center ">
           {post?.categories?.map(({ _id, title }) => (
-            <Tag key={_id} text={title} />
+            <Tag key={_id + title} text={title} />
           ))}
         </div>
         <h3 className=" text-lg font-bold">{post?.title}</h3>
